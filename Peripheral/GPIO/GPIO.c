@@ -12,7 +12,7 @@
  */
 void GPIO_MOTOR_STBY(uint8_t State)
 {
-    GPIO_WriteBit(GPIOA, GPIO_Pin_12, (BitAction)State);
+    GPIO_WriteBit(GPIOB, GPIO_Pin_13, (BitAction)State);
 }
 
 /**
@@ -27,7 +27,7 @@ void GPIO_MOTOR_STBY(uint8_t State)
  */
 void GPIO_MOTOR_AIN1(uint8_t State)
 {
-    GPIO_WriteBit(GPIOA, GPIO_Pin_11, (BitAction)State);
+    GPIO_WriteBit(GPIOB, GPIO_Pin_1, (BitAction)State);
 }
 
 /**
@@ -42,7 +42,7 @@ void GPIO_MOTOR_AIN1(uint8_t State)
  */
 void GPIO_MOTOR_AIN2(uint8_t State)
 {
-    GPIO_WriteBit(GPIOA, GPIO_Pin_10, (BitAction)State);
+    GPIO_WriteBit(GPIOB, GPIO_Pin_0, (BitAction)State);
 }
 
 /**
@@ -57,7 +57,7 @@ void GPIO_MOTOR_AIN2(uint8_t State)
  */
 void GPIO_MOTOR_BIN1(uint8_t State)
 {
-    GPIO_WriteBit(GPIOA, GPIO_Pin_15, (BitAction)State);
+    GPIO_WriteBit(GPIOB, GPIO_Pin_14, (BitAction)State);
 }
 
 /**
@@ -72,7 +72,7 @@ void GPIO_MOTOR_BIN1(uint8_t State)
  */
 void GPIO_MOTOR_BIN2(uint8_t State)
 {
-    GPIO_WriteBit(GPIOB, GPIO_Pin_3, (BitAction)State);
+    GPIO_WriteBit(GPIOB, GPIO_Pin_15, (BitAction)State);
 }
 
 /**
@@ -235,11 +235,11 @@ uint8_t GPIO_UltraSound_Echo(void)
  *
  * @retval 无
  *
- * @note PA12-STBY
- * @note PA11-AIN1
- * @note PA10-AIN2
- * @note PA15-BIN1
- * @note PB3-BIN2
+ * @note PB13-STBY
+ * @note PB1-AIN1
+ * @note PB0-AIN2
+ * @note PB14-BIN1
+ * @note PB15-BIN2
  * @note PA6-PWMA
  * @note PA7-PWMB
  * @note 编码器引脚在ENCODER_InitPro()中配置
@@ -270,19 +270,25 @@ void GPIO_MOTOR_Init(void)
     GPIO_Init(GPIOA, &GPIO_INITSTRUCTURE);
 
     // 引脚配置 STBY|AINx|BINx
-    GPIO_INITSTRUCTURE.GPIO_Pin = GPIO_Pin_12 | GPIO_Pin_15 | GPIO_Pin_10 | GPIO_Pin_11;
+    GPIO_INITSTRUCTURE.GPIO_Pin = GPIO_Pin_13;
     GPIO_INITSTRUCTURE.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_INITSTRUCTURE.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA, &GPIO_INITSTRUCTURE);
+    GPIO_Init(GPIOB, &GPIO_INITSTRUCTURE);
 
     // 引脚配置 STBY|AINx|BINx
-    GPIO_INITSTRUCTURE.GPIO_Pin = GPIO_Pin_3;
+    GPIO_INITSTRUCTURE.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_0;
+    GPIO_INITSTRUCTURE.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_INITSTRUCTURE.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOB, &GPIO_INITSTRUCTURE);
+
+    // 引脚配置 STBY|AINx|BINx
+    GPIO_INITSTRUCTURE.GPIO_Pin = GPIO_Pin_14 | GPIO_Pin_15;
     GPIO_INITSTRUCTURE.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_INITSTRUCTURE.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOB, &GPIO_INITSTRUCTURE);
 
     // 引脚默认配置
-    GPIO_MOTOR_STBY(Bit_RESET);
+    GPIO_MOTOR_STBY(Bit_SET);
     GPIO_MOTOR_AIN1(Bit_RESET);
     GPIO_MOTOR_AIN2(Bit_RESET);
     GPIO_MOTOR_BIN1(Bit_RESET);
@@ -510,13 +516,13 @@ void GPIO_USART_Init(void)
  */
 void GPIO_InitPro(void)
 {
-    GPIO_IIC_Init();
-    GPIO_ENCODER_Init();
-    GPIO_MPU6050_Init();
+    // GPIO_IIC_Init();
+    // GPIO_ENCODER_Init();
+    // GPIO_MPU6050_Init();
     GPIO_MOTOR_Init();
 
-    GPIO_USART_Init();
-    GPIO_LED_Init();
-    GPIO_Buzzer_Init();
-    GPIO_UltraSound_Init();
+    // GPIO_USART_Init();
+    // GPIO_LED_Init();
+    // GPIO_Buzzer_Init();
+    // GPIO_UltraSound_Init();
 }

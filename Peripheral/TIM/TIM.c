@@ -39,7 +39,7 @@ void TIM_Encoder_Init(void)
     // 默认计数值
     TIM_SetCounter(TIM1, 0);
 
-	// TIM1编码模式 TI1和TI2都开启计数，边沿信号不反转
+    // TIM1编码模式 TI1和TI2都开启计数，边沿信号不反转
     TIM_EncoderInterfaceConfig(TIM1, TIM_EncoderMode_TI12, TIM_ICPolarity_Rising, TIM_ICPolarity_Rising);
 
     // 使能定时器
@@ -118,32 +118,6 @@ void TIM_MOTOR_Init(void)
     TIM_OC2Init(TIM3, &TIM_OCInitStructure);
 
     TIM_Cmd(TIM3, ENABLE);
-}
-
-/**
- * @brief 定时器4初始化
- *
- * @param 无
- *
- * @retval 无
- *
- * @note 1us计数1次
- * @note 此函数用于超声波计数
- */
-void TIM_Count_Init(void)
-{
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-    TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
-
-    TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-    TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-    TIM_TimeBaseInitStructure.TIM_Period = 65535;              // ARR
-    TIM_TimeBaseInitStructure.TIM_Prescaler = 71;              // PSC
-    TIM_TimeBaseInitStructure.TIM_RepetitionCounter = DISABLE; // 溢出x次后才触发更新中断
-    TIM_TimeBaseInit(TIM4, &TIM_TimeBaseInitStructure);
-
-    TIM_SetCounter(TIM4, 0);
-    TIM_Cmd(TIM4, DISABLE);
 }
 
 /**
@@ -271,8 +245,5 @@ void TIM_Encoder_SetCount(int16_t count)
  */
 void TIM_InitPro(void)
 {
-    TIM_Encoder_Init();
-    TIM_Delay_Init();
     TIM_MOTOR_Init();
-    TIM_Count_Init();
 }
