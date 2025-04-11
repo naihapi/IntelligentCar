@@ -2459,14 +2459,14 @@ Image Symbol Table
     i.IIC_WriteReg                           0x08000a74   Section        0  iic.o(i.IIC_WriteReg)
     i.MOTOR_ENABLE                           0x08000ad8   Section        0  motor.o(i.MOTOR_ENABLE)
     i.MOTOR_InitPro                          0x08000ae2   Section        0  motor.o(i.MOTOR_InitPro)
-    i.MOTOR_Left_Negative                    0x08000af2   Section        0  motor.o(i.MOTOR_Left_Negative)
-    i.MOTOR_Left_Positive                    0x08000b02   Section        0  motor.o(i.MOTOR_Left_Positive)
-    i.MOTOR_Left_Pulse                       0x08000b12   Section        0  motor.o(i.MOTOR_Left_Pulse)
-    i.MOTOR_Limit                            0x08000b1e   Section        0  motor.o(i.MOTOR_Limit)
-    i.MOTOR_Pulse_Config                     0x08000b32   Section        0  motor.o(i.MOTOR_Pulse_Config)
-    i.MOTOR_Right_Negative                   0x08000bb2   Section        0  motor.o(i.MOTOR_Right_Negative)
-    i.MOTOR_Right_Positive                   0x08000bc2   Section        0  motor.o(i.MOTOR_Right_Positive)
-    i.MOTOR_Right_Pulse                      0x08000bd2   Section        0  motor.o(i.MOTOR_Right_Pulse)
+    i.MOTOR_Left_Negative                    0x08000af4   Section        0  motor.o(i.MOTOR_Left_Negative)
+    i.MOTOR_Left_Positive                    0x08000b04   Section        0  motor.o(i.MOTOR_Left_Positive)
+    i.MOTOR_Left_Pulse                       0x08000b14   Section        0  motor.o(i.MOTOR_Left_Pulse)
+    i.MOTOR_Limit                            0x08000b20   Section        0  motor.o(i.MOTOR_Limit)
+    i.MOTOR_Pulse_Config                     0x08000b34   Section        0  motor.o(i.MOTOR_Pulse_Config)
+    i.MOTOR_Right_Negative                   0x08000bb4   Section        0  motor.o(i.MOTOR_Right_Negative)
+    i.MOTOR_Right_Positive                   0x08000bc4   Section        0  motor.o(i.MOTOR_Right_Positive)
+    i.MOTOR_Right_Pulse                      0x08000bd4   Section        0  motor.o(i.MOTOR_Right_Pulse)
     i.MPU6050_DMP_Get_Data                   0x08000be0   Section        0  mpu6050.o(i.MPU6050_DMP_Get_Data)
     i.MemManage_Handler                      0x08000e40   Section        0  stm32f10x_it.o(i.MemManage_Handler)
     i.NMI_Handler                            0x08000e44   Section        0  stm32f10x_it.o(i.NMI_Handler)
@@ -2821,15 +2821,15 @@ Image Symbol Table
     IIC_Stop                                 0x08000a5f   Thumb Code    22  iic.o(i.IIC_Stop)
     IIC_WriteReg                             0x08000a75   Thumb Code   100  iic.o(i.IIC_WriteReg)
     MOTOR_ENABLE                             0x08000ad9   Thumb Code    10  motor.o(i.MOTOR_ENABLE)
-    MOTOR_InitPro                            0x08000ae3   Thumb Code    16  motor.o(i.MOTOR_InitPro)
-    MOTOR_Left_Negative                      0x08000af3   Thumb Code    16  motor.o(i.MOTOR_Left_Negative)
-    MOTOR_Left_Positive                      0x08000b03   Thumb Code    16  motor.o(i.MOTOR_Left_Positive)
-    MOTOR_Left_Pulse                         0x08000b13   Thumb Code    12  motor.o(i.MOTOR_Left_Pulse)
-    MOTOR_Limit                              0x08000b1f   Thumb Code    20  motor.o(i.MOTOR_Limit)
-    MOTOR_Pulse_Config                       0x08000b33   Thumb Code   128  motor.o(i.MOTOR_Pulse_Config)
-    MOTOR_Right_Negative                     0x08000bb3   Thumb Code    16  motor.o(i.MOTOR_Right_Negative)
-    MOTOR_Right_Positive                     0x08000bc3   Thumb Code    16  motor.o(i.MOTOR_Right_Positive)
-    MOTOR_Right_Pulse                        0x08000bd3   Thumb Code    12  motor.o(i.MOTOR_Right_Pulse)
+    MOTOR_InitPro                            0x08000ae3   Thumb Code    18  motor.o(i.MOTOR_InitPro)
+    MOTOR_Left_Negative                      0x08000af5   Thumb Code    16  motor.o(i.MOTOR_Left_Negative)
+    MOTOR_Left_Positive                      0x08000b05   Thumb Code    16  motor.o(i.MOTOR_Left_Positive)
+    MOTOR_Left_Pulse                         0x08000b15   Thumb Code    12  motor.o(i.MOTOR_Left_Pulse)
+    MOTOR_Limit                              0x08000b21   Thumb Code    20  motor.o(i.MOTOR_Limit)
+    MOTOR_Pulse_Config                       0x08000b35   Thumb Code   128  motor.o(i.MOTOR_Pulse_Config)
+    MOTOR_Right_Negative                     0x08000bb5   Thumb Code    16  motor.o(i.MOTOR_Right_Negative)
+    MOTOR_Right_Positive                     0x08000bc5   Thumb Code    16  motor.o(i.MOTOR_Right_Positive)
+    MOTOR_Right_Pulse                        0x08000bd5   Thumb Code    12  motor.o(i.MOTOR_Right_Pulse)
     MPU6050_DMP_Get_Data                     0x08000be1   Thumb Code   580  mpu6050.o(i.MPU6050_DMP_Get_Data)
     MemManage_Handler                        0x08000e41   Thumb Code     4  stm32f10x_it.o(i.MemManage_Handler)
     NMI_Handler                              0x08000e45   Thumb Code     2  stm32f10x_it.o(i.NMI_Handler)
@@ -3123,16 +3123,15 @@ Memory Map of the image
     0x08000a5e   0x08000a5e   0x00000016   Code   RO         3549    i.IIC_Stop          iic.o
     0x08000a74   0x08000a74   0x00000064   Code   RO         3550    i.IIC_WriteReg      iic.o
     0x08000ad8   0x08000ad8   0x0000000a   Code   RO         3796    i.MOTOR_ENABLE      motor.o
-    0x08000ae2   0x08000ae2   0x00000010   Code   RO         3797    i.MOTOR_InitPro     motor.o
-    0x08000af2   0x08000af2   0x00000010   Code   RO         3798    i.MOTOR_Left_Negative  motor.o
-    0x08000b02   0x08000b02   0x00000010   Code   RO         3799    i.MOTOR_Left_Positive  motor.o
-    0x08000b12   0x08000b12   0x0000000c   Code   RO         3800    i.MOTOR_Left_Pulse  motor.o
-    0x08000b1e   0x08000b1e   0x00000014   Code   RO         3801    i.MOTOR_Limit       motor.o
-    0x08000b32   0x08000b32   0x00000080   Code   RO         3802    i.MOTOR_Pulse_Config  motor.o
-    0x08000bb2   0x08000bb2   0x00000010   Code   RO         3803    i.MOTOR_Right_Negative  motor.o
-    0x08000bc2   0x08000bc2   0x00000010   Code   RO         3804    i.MOTOR_Right_Positive  motor.o
-    0x08000bd2   0x08000bd2   0x0000000c   Code   RO         3805    i.MOTOR_Right_Pulse  motor.o
-    0x08000bde   0x08000bde   0x00000002   PAD
+    0x08000ae2   0x08000ae2   0x00000012   Code   RO         3797    i.MOTOR_InitPro     motor.o
+    0x08000af4   0x08000af4   0x00000010   Code   RO         3798    i.MOTOR_Left_Negative  motor.o
+    0x08000b04   0x08000b04   0x00000010   Code   RO         3799    i.MOTOR_Left_Positive  motor.o
+    0x08000b14   0x08000b14   0x0000000c   Code   RO         3800    i.MOTOR_Left_Pulse  motor.o
+    0x08000b20   0x08000b20   0x00000014   Code   RO         3801    i.MOTOR_Limit       motor.o
+    0x08000b34   0x08000b34   0x00000080   Code   RO         3802    i.MOTOR_Pulse_Config  motor.o
+    0x08000bb4   0x08000bb4   0x00000010   Code   RO         3803    i.MOTOR_Right_Negative  motor.o
+    0x08000bc4   0x08000bc4   0x00000010   Code   RO         3804    i.MOTOR_Right_Positive  motor.o
+    0x08000bd4   0x08000bd4   0x0000000c   Code   RO         3805    i.MOTOR_Right_Pulse  motor.o
     0x08000be0   0x08000be0   0x00000260   Code   RO         3926    i.MPU6050_DMP_Get_Data  mpu6050.o
     0x08000e40   0x08000e40   0x00000004   Code   RO         5104    i.MemManage_Handler  stm32f10x_it.o
     0x08000e44   0x08000e44   0x00000002   Code   RO         5105    i.NMI_Handler       stm32f10x_it.o
@@ -3288,7 +3287,7 @@ Image component sizes
        560         10          0          0         16       7516   inv_mpu_dmp_motion_driver.o
         22          0          0          0          0        471   main.o
        112         12          0          0          0     204336   misc.o
-       262          0          0          0          0       5227   motor.o
+       264          0          0          0          0       5227   motor.o
        608         28          0         52          0       2058   mpu6050.o
        972        164          0        120          0       4280   pid.o
        202         18          0          0          0       3706   port.o
@@ -3308,7 +3307,7 @@ Image component sizes
     ----------------------------------------------------------------------
       8170        702        356       2380       1752     602322   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        22          0          4          1          0          0   (incl. Padding)
+        20          0          4          1          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 

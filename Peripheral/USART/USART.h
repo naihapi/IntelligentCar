@@ -1,5 +1,5 @@
-#ifndef _USART_H_
-#define _USART_H_
+#ifndef _USART_H
+#define _USART_H
 
 // 标准库
 #include "string.h"
@@ -12,23 +12,25 @@
 // 变量
 extern uint8_t USART2_RecFlag;
 extern uint8_t USART2_RecBuffer[1024];
+extern uint8_t USART3_RecFlag;
+extern uint8_t USART3_RecBuffer[1024];
 
 // 宏定义
 //...
 
 // API
 void USART_InitPro(void);
-void USART3_Clear_RecBuffer(void);
-uint8_t *USART3_Get_RecBuffer(void);
-void USART3_SendByte(uint16_t Byte);
-void USART3_SendString(uint8_t *String);
-void USART3_SendNumber(int32_t Number);
-void USART3_RecState(void);
 void USART2_Clear_RecBuffer(void);
+void USART3_Clear_RecBuffer(void);
 uint8_t *USART2_Get_RecBuffer(void);
+uint8_t *USART3_Get_RecBuffer(void);
 void USART2_SendByte(uint16_t Byte);
+void USART3_SendByte(uint16_t Byte);
 void USART2_SendString(uint8_t *String);
+void USART3_SendString(uint8_t *String);
 void USART2_SendNumber(int32_t Number);
+void USART3_SendNumber(int32_t Number);
 void USART2_RecState(void);
+void USART3_RecState(void);
 
 #endif
