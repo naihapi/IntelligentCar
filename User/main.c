@@ -20,9 +20,15 @@ int main(void)
 	/*---外件---*/
 	MOTOR_InitPro();
 
+	GPIO_WriteBit(GPIOB, GPIO_Pin_0, Bit_SET);
+	GPIO_WriteBit(GPIOB, GPIO_Pin_1, Bit_RESET);
+	GPIO_WriteBit(GPIOB, GPIO_Pin_14, Bit_SET);
+	GPIO_WriteBit(GPIOB, GPIO_Pin_15, Bit_RESET);
+	// MPU6050_InitPro();
+
 	/*---软件---*/
 	//...
 
 	/*开启任务调度*/
-	TASK_InitPro();
+	// TASK_InitPro();
 }

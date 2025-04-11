@@ -40,8 +40,8 @@ int MOTOR_Limit(int NowValue, int TargetValue)
  */
 void MOTOR_Left_Positive(void)
 {
-    GPIO_MOTOR_AIN1(0);
-    GPIO_MOTOR_AIN2(1);
+    GPIO_MOTOR_AIN1(1);
+    GPIO_MOTOR_AIN2(0);
 }
 
 /**
@@ -55,8 +55,8 @@ void MOTOR_Left_Positive(void)
  */
 void MOTOR_Left_Negative(void)
 {
-    GPIO_MOTOR_AIN1(1);
-    GPIO_MOTOR_AIN2(0);
+    GPIO_MOTOR_AIN1(0);
+    GPIO_MOTOR_AIN2(1);
 }
 
 /**
@@ -101,6 +101,11 @@ void MOTOR_Right_Negative(void)
 void MOTOR_ENABLE(void)
 {
     GPIO_MOTOR_STBY(1);
+
+    // GPIO_WriteBit(GPIOB, GPIO_Pin_0, Bit_RESET);
+    // GPIO_WriteBit(GPIOB, GPIO_Pin_1, Bit_RESET);
+    // GPIO_WriteBit(GPIOB, GPIO_Pin_14, Bit_RESET);
+    // GPIO_WriteBit(GPIOB, GPIO_Pin_15, Bit_RESET);
 }
 
 /**
@@ -195,5 +200,5 @@ void MOTOR_Pulse_Config(int LeftPulse, int RightPulse)
 void MOTOR_InitPro(void)
 {
     MOTOR_ENABLE();
-    MOTOR_Pulse_Config(-7200, 7200);
+    MOTOR_Pulse_Config(7200, 5000);
 }
