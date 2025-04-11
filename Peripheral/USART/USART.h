@@ -18,7 +18,14 @@ extern uint8_t USART2_RecBuffer[1024];
 
 // API
 void USART_InitPro(void);
+void USART3_Clear_RecBuffer(void);
+uint8_t *USART3_Get_RecBuffer(void);
+void USART3_SendByte(uint16_t Byte);
+void USART3_SendString(uint8_t *String);
+void USART3_SendNumber(int32_t Number);
+void USART3_RecState(void);
 void USART2_Clear_RecBuffer(void);
+uint8_t *USART2_Get_RecBuffer(void);
 void USART2_SendByte(uint16_t Byte);
 void USART2_SendString(uint8_t *String);
 void USART2_SendNumber(int32_t Number);

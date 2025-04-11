@@ -486,23 +486,46 @@ void GPIO_UltraSound_Init(void)
     GPIO_UltraSound_Trig(0);
 }
 
+/**
+ * @brief 串口初始化
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note 无线串口：PA2=TX2 PA3=RX2
+ * @note OpenMV：PB10=TX3 PB11=RX3
+ */
 void GPIO_USART_Init(void)
 {
     // 开启时钟和结构体定义
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
     GPIO_InitTypeDef GPIO_InitStructure;
 
-    // 引脚TX配置
+    // 引脚TX2配置
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-    // 引脚RX配置
+    // 引脚RX2配置
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+    // 引脚TX3配置
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+    // 引脚RX3配置
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOB, &GPIO_InitStructure);
 }
 
 /**
@@ -520,8 +543,7 @@ void GPIO_InitPro(void)
     // GPIO_ENCODER_Init();
     // GPIO_MPU6050_Init();
     GPIO_MOTOR_Init();
-
-    // GPIO_USART_Init();
+    GPIO_USART_Init();
     // GPIO_LED_Init();
     // GPIO_Buzzer_Init();
     // GPIO_UltraSound_Init();

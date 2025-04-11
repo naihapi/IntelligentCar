@@ -101,11 +101,6 @@ void MOTOR_Right_Negative(void)
 void MOTOR_ENABLE(void)
 {
     GPIO_MOTOR_STBY(1);
-
-    // GPIO_WriteBit(GPIOB, GPIO_Pin_0, Bit_RESET);
-    // GPIO_WriteBit(GPIOB, GPIO_Pin_1, Bit_RESET);
-    // GPIO_WriteBit(GPIOB, GPIO_Pin_14, Bit_RESET);
-    // GPIO_WriteBit(GPIOB, GPIO_Pin_15, Bit_RESET);
 }
 
 /**
@@ -197,8 +192,17 @@ void MOTOR_Pulse_Config(int LeftPulse, int RightPulse)
     }
 }
 
+/**
+ * @brief  电机初始化
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note 无
+ */
 void MOTOR_InitPro(void)
 {
     MOTOR_ENABLE();
-    MOTOR_Pulse_Config(7200, 5000);
+    MOTOR_Pulse_Config(0, 0);
 }
