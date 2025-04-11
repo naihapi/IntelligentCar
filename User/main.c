@@ -13,6 +13,7 @@ int main(void)
 	/*---外设---*/
 	GPIO_InitPro();
 	TIM_InitPro();
+
 	// USART_InitPro();
 	// IIC_InitPro();
 
