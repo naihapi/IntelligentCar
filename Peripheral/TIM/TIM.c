@@ -245,5 +245,6 @@ void TIM_Encoder_SetCount(int16_t count)
  */
 void TIM_InitPro(void)
 {
+    TIM_Delay_Init();
     TIM_MOTOR_Init();
 }

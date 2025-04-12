@@ -26,7 +26,7 @@ void TASK1(void *pvParameters)
 {
     while (1)
     {
-        UltraSound_Function();
+        // UltraSound_Function();
         vTaskDelay(500);
     }
 }
@@ -54,7 +54,7 @@ void TASK3(void *pvParameters)
 {
     while (1)
     {
-        Receive_Function();
+        // Receive_Function();
     }
 }
 
@@ -67,7 +67,7 @@ void TASK4(void *pvParameters)
 {
     while (1)
     {
-        MPU6050_FallDown_Handler();
+        // MPU6050_FallDown_Handler();
     }
 }
 

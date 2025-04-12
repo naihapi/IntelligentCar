@@ -86,7 +86,7 @@ void GPIO_MOTOR_BIN2(uint8_t State)
  */
 void GPIO_SCL_Config(uint8_t signal)
 {
-    GPIO_WriteBit(GPIOB, GPIO_Pin_10, (BitAction)signal);
+    GPIO_WriteBit(GPIOA, GPIO_Pin_11, (BitAction)signal);
     Delay_us(1);
 }
 
@@ -101,7 +101,7 @@ void GPIO_SCL_Config(uint8_t signal)
  */
 void GPIO_SDA_Config(uint8_t signal)
 {
-    GPIO_WriteBit(GPIOB, GPIO_Pin_11, (BitAction)signal);
+    GPIO_WriteBit(GPIOA, GPIO_Pin_12, (BitAction)signal);
     Delay_us(1);
 }
 
@@ -110,42 +110,13 @@ void GPIO_SDA_Config(uint8_t signal)
  *
  * @param 无
  *
- * @retval 1 高电平
- * @retval 0 低电平
+ * @retval 返回1或0电平
  *
  * @note 无
  */
 uint8_t GPIO_SDA_Read(void)
 {
-    return GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_11);
-}
-
-/**
- * @brief 后车灯控制
- *
- * @param State (1：打开，0：关闭)
- *
- * @retval 无
- *
- * @note 无
- */
-void GPIO_LED_RearLED(uint8_t State)
-{
-    GPIO_WriteBit(GPIOB, GPIO_Pin_13, (BitAction)State);
-}
-
-/**
- * @brief 前车灯控制
- *
- * @param State (1：打开，0：关闭)
- *
- * @retval 无
- *
- * @note 无
- */
-void GPIO_LED_FrontLED(uint8_t State)
-{
-    GPIO_WriteBit(GPIOC, GPIO_Pin_13, (BitAction)State);
+    return GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_12);
 }
 
 /**
@@ -197,35 +168,6 @@ void GPIO_Buzzer_Init(void)
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
-}
-
-/**
- * @brief 超声波触发控制
- *
- * @param 无
- *
- * @retval 无
- *
- * @note 无
- */
-void GPIO_UltraSound_Trig(uint8_t State)
-{
-    GPIO_WriteBit(GPIOB, GPIO_Pin_12, (BitAction)State);
-}
-
-/**
- * @brief 超声波接收读取
- *
- * @param 无
- *
- * @retval 1 高电平
- * @retval 0 低电平
- *
- * @note 无
- */
-uint8_t GPIO_UltraSound_Echo(void)
-{
-    return GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0);
 }
 
 /**
@@ -334,22 +276,23 @@ void GPIO_ENCODER_Init(void)
  *
  * @retval 无
  *
- * @note PB10=SCL PB11=SDA
+ * @note PA11=SCL PA12=SDA
  * @note IIC2挂载设备：MPU6050
  */
 void GPIO_IIC_Init(void)
 {
     // 开启时钟和结构体定义
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
     GPIO_InitTypeDef GPIO_InitStructure;
 
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10 | GPIO_Pin_11;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11 | GPIO_Pin_12;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-    GPIO_WriteBit(GPIOB, GPIO_Pin_10, Bit_SET);
-    GPIO_WriteBit(GPIOB, GPIO_Pin_11, Bit_SET);
+    // 拉高总线
+    GPIO_WriteBit(GPIOA, GPIO_Pin_11, Bit_SET);
+    GPIO_WriteBit(GPIOA, GPIO_Pin_12, Bit_SET);
 }
 
 /**
@@ -435,58 +378,6 @@ void GPIO_LED_Init(void)
 }
 
 /**
- * @brief 超声波IO初始化
- *
- * @param 无
- *
- * @retval 无
- *
- * @note 依靠外部中断测量距离
- */
-void GPIO_UltraSound_Init(void)
-{
-    // 开启时钟
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-
-    // 结构体定义
-    GPIO_InitTypeDef GPIO_InitStructure;
-    EXTI_InitTypeDef EXTI_InitStructure;
-    NVIC_InitTypeDef NVIC_InitStructure;
-
-    // TRIG
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-    // ECHO
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
-
-    // 外部中断线配置
-    GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource0);
-
-    // 外部中断配置
-    EXTI_InitStructure.EXTI_Line = EXTI_Line0;
-    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
-    EXTI_Init(&EXTI_InitStructure);
-
-    // 中断向量配置
-    NVIC_InitStructure.NVIC_IRQChannel = EXTI0_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
-    NVIC_Init(&NVIC_InitStructure);
-
-    // 关闭TRIG
-    GPIO_UltraSound_Trig(0);
-}
-
-/**
  * @brief 串口初始化
  *
  * @param 无
@@ -539,11 +430,13 @@ void GPIO_USART_Init(void)
  */
 void GPIO_InitPro(void)
 {
-    // GPIO_IIC_Init();
+    GPIO_IIC_Init();
     // GPIO_ENCODER_Init();
-    // GPIO_MPU6050_Init();
+    GPIO_MPU6050_Init();
+
     GPIO_MOTOR_Init();
     GPIO_USART_Init();
+
     // GPIO_LED_Init();
     // GPIO_Buzzer_Init();
     // GPIO_UltraSound_Init();

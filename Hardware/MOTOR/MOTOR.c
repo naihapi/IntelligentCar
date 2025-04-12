@@ -204,5 +204,5 @@ void MOTOR_Pulse_Config(int LeftPulse, int RightPulse)
 void MOTOR_InitPro(void)
 {
     MOTOR_ENABLE();
-    MOTOR_Pulse_Config(7200, 7200);
+    MOTOR_Pulse_Config(0, 0);
 }

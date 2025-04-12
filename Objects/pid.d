@@ -58,10 +58,3 @@
 .\objects\pid.o: .\Software\PID\PID.h
 .\objects\pid.o: .\Hardware\MPU6050\MPU6050_Reg.h
 .\objects\pid.o: .\Software\Manual\Manual.h
-.\objects\pid.o: .\Hardware\UltraSound\UltraSound.h
-.\objects\pid.o: .\Software\Receive\Receive.h
-.\objects\pid.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\pid.o: D:\Keil5\ARM\ARMCC\Bin\..\include\ctype.h
-.\objects\pid.o: .\Hardware\CC2530\CC2530.h
-.\objects\pid.o: .\Software\Manual\Manual.h
-.\objects\pid.o: .\Software\Reply\Reply.h

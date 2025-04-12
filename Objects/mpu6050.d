@@ -57,12 +57,4 @@
 .\objects\mpu6050.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\mpu6050.o: .\Hardware\MPU6050\MPU6050.h
 .\objects\mpu6050.o: .\Software\Manual\Manual.h
-.\objects\mpu6050.o: .\Hardware\UltraSound\UltraSound.h
-.\objects\mpu6050.o: .\Software\Receive\Receive.h
-.\objects\mpu6050.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\mpu6050.o: D:\Keil5\ARM\ARMCC\Bin\..\include\ctype.h
-.\objects\mpu6050.o: .\Hardware\CC2530\CC2530.h
-.\objects\mpu6050.o: .\Software\Manual\Manual.h
-.\objects\mpu6050.o: .\Software\Reply\Reply.h
-.\objects\mpu6050.o: .\Software\PID\PID.h
 .\objects\mpu6050.o: Hardware\MPU6050\MPU6050_Reg.h

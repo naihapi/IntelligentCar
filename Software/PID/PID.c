@@ -158,45 +158,14 @@ int PID_Return_Function(float NowValue, float TargetValue)
  * @retval 无
  *
  * @note 用于PID控制，PID控制在中断内完成
- * @note 使用并级PID，相加输出
  */
-int PWM_Output = 0, PWM_Output_Left = 0, PWM_Output_Right = 0;
-float speed = 0;
-int PID_Value_vertical = 0;
-int PID_Value_speed = 0;
-int PID_Value_Turn = 0;
-
 void EXTI1_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line1) == SET)
     {
         if (!MPU6050_DMP_Get_Data(&MPU6050_Pitch, &MPU6050_Roll, &MPU6050_Yaw))
         {
-            if (PID_State != 1)
-            {
-                MOTOR_Pulse_Config(0, 0);
-                return;
-            }
-
-            // 获取速度
-            ENCODER_GetSpeed(&speed);
-
-            // PID计算：直立环、速度环
-            PID_Value_vertical = PID_Vertical_Function(MPU6050_Pitch, 0);
-            PID_Value_speed = PID_Speed_Function(speed, TargetValue_Speed);
-            PID_Value_Turn = PID_Return_Function(MPU6050_Yaw, TargetValue_Turn);
-
-            // 并级PID
-            PWM_Output = PID_Value_vertical + PID_Value_speed;
-
-            // PID转向控制(左转Yaw增加，右转Yaw减少)
-            PWM_Output_Left = PWM_Output - PID_Value_Turn;
-            PWM_Output_Right = PWM_Output + PID_Value_Turn;
-
-            // PWM输出
-            MOTOR_Pulse_Config(PWM_Output_Left, PWM_Output_Right);
         }
-
         EXTI_ClearITPendingBit(EXTI_Line1);
     }
 }
