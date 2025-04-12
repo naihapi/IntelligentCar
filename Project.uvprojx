@@ -340,7 +340,7 @@
               <MiscControls>--no-multibyte-chars</MiscControls>
               <Define>USE_STDPERIPH_DRIVER STM32F10X_MD MPU6050</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\Library;.\System;.\User;.\Peripheral;.\Hardware;.\Peripheral\GPIO;.\Peripheral\TIM;.\Peripheral\IIC;.\Peripheral\ENCODER;.\Peripheral\USART;.\Peripheral\ADC;.\Hardware\MOTOR;.\Hardware\MPU6050;.\Hardware\UltraSound;.\Hardware\CC2530;.\Software;.\Software\PID;.\Software\MyTask;.\Software\DMP;.\Software\Delay;.\Software\Receive;.\Software\Manual;.\Software\Reply;.\FreeRTOS\FreeRTOS_CORE;.\FreeRTOS\FreeRTOS_PORT;.\FreeRTOS\FreeRTOS_CORE\include</IncludePath>
+              <IncludePath>.\Start;.\Library;.\System;.\User;.\Peripheral;.\Hardware;.\Peripheral\GPIO;.\Peripheral\TIM;.\Peripheral\IIC;.\Peripheral\ENCODER;.\Peripheral\USART;.\Peripheral\ADC;.\Hardware\MOTOR;.\Hardware\MPU6050;.\Hardware\UltraSound;.\Hardware\CC2530;.\Software;.\Software\PID;.\Software\MyTask;.\Software\DMP;.\Software\Delay;.\Software\Receive;.\Software\Manual;.\Software\Reply;.\Software\Data;.\FreeRTOS\FreeRTOS_CORE;.\FreeRTOS\FreeRTOS_PORT;.\FreeRTOS\FreeRTOS_CORE\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -745,16 +745,6 @@
               <FilePath>.\Hardware\MOTOR\MOTOR.h</FilePath>
             </File>
             <File>
-              <FileName>UltraSound.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\UltraSound\UltraSound.c</FilePath>
-            </File>
-            <File>
-              <FileName>UltraSound.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\UltraSound\UltraSound.h</FilePath>
-            </File>
-            <File>
               <FileName>MPU6050.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\MPU6050\MPU6050.c</FilePath>
@@ -763,16 +753,6 @@
               <FileName>MPU6050.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\MPU6050\MPU6050.h</FilePath>
-            </File>
-            <File>
-              <FileName>CC2530.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\CC2530\CC2530.c</FilePath>
-            </File>
-            <File>
-              <FileName>CC2530.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\CC2530\CC2530.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -868,6 +848,16 @@
               <FileName>Manual.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Software\Manual\Manual.h</FilePath>
+            </File>
+            <File>
+              <FileName>Data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Software\Data\Data.c</FilePath>
+            </File>
+            <File>
+              <FileName>Data.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Software\Data\Data.h</FilePath>
             </File>
           </Files>
         </Group>

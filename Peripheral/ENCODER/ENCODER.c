@@ -2,8 +2,39 @@
 
 uint16_t L_ENCODER_CNT = 0; // 无论正或反转一圈,都产生1400个计数
 uint16_t R_ENCODER_CNT = 0; // 无论正或反转一圈,都产生1400个计数
+uint8_t ENCODER_Speed = 0;  // 编码电机速度(cm/s)
 
 void ENCODER_InitPro(void) {}
+
+/**
+ * @brief 编码电机测速
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note 无
+ */
+void ENCODER_Collection_CodeData(void)
+{
+    float encoder = 0;
+    float speed = 0;
+
+    // 取两路编码平均值
+    encoder = (L_ENCODER_CNT + R_ENCODER_CNT) / 2;
+
+    // 速度：XXcm/100ms
+    speed = (encoder / ENCODER_Cycle) * ENCODER_Perimeter;
+
+    // 预测速度：XXcm/1s
+    ENCODER_Speed = (uint8_t)(speed * 10);
+
+    // 清空编码计数值
+    L_ENCODER_CNT = 0;
+    R_ENCODER_CNT = 0;
+
+    vTaskDelay(100);
+}
 
 void EXTI9_5_IRQHandler(void)
 {

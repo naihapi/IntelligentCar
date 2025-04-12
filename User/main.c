@@ -18,10 +18,10 @@ int main(void)
 
 	/*---外件---*/
 	MOTOR_InitPro();
-	// MPU6050_InitPro();
+	MPU6050_InitPro();
 
 	/*---软件---*/
-	//...
+	Data_InitPro();
 
 	/*开启任务调度*/
 	TASK_InitPro();

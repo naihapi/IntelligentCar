@@ -52,7 +52,11 @@ void TASK3(void *pvParameters)
 {
     while (1)
     {
-        // Receive_Function();
+        SwitchModule_t *current;
+
+        current = Data_DataBase_GetItem(Head_DataBase, "Buzzer");
+        USART2_SendNumber(current->state);
+        vTaskDelay(1000);
     }
 }
 
@@ -126,6 +130,7 @@ void TASK9(void *pvParameters)
 {
     while (1)
     {
+        ENCODER_Collection_CodeData();
     }
 }
 

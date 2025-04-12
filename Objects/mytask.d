@@ -41,7 +41,6 @@
 .\objects\mytask.o: .\FreeRTOS\FreeRTOS_CORE\include\mpu_wrappers.h
 .\objects\mytask.o: .\FreeRTOS\FreeRTOS_CORE\include\task.h
 .\objects\mytask.o: .\FreeRTOS\FreeRTOS_CORE\include\list.h
-.\objects\mytask.o: .\Hardware\UltraSound\UltraSound.h
 .\objects\mytask.o: .\Hardware\MOTOR\MOTOR.h
 .\objects\mytask.o: .\Peripheral\GPIO\GPIO.h
 .\objects\mytask.o: .\Software\Delay\Delay.h
@@ -61,7 +60,7 @@
 .\objects\mytask.o: .\Hardware\MPU6050\MPU6050.h
 .\objects\mytask.o: .\Software\Manual\Manual.h
 .\objects\mytask.o: .\Hardware\MPU6050\MPU6050_Reg.h
-.\objects\mytask.o: .\Hardware\CC2530\CC2530.h
 .\objects\mytask.o: Software\MyTask\MyTask.h
 .\objects\mytask.o: .\Software\Receive\Receive.h
 .\objects\mytask.o: .\Software\Manual\Manual.h
+.\objects\mytask.o: .\Software\Data\Data.h

@@ -4,6 +4,7 @@
         "string": "c",
         "array": "c",
         "string_view": "c",
-        "usart.h": "c"
+        "usart.h": "c",
+        "stdio.h": "c"
     }
 }

@@ -20,17 +20,16 @@
 #include "task.h"
 
 // 外置硬件
-#include "UltraSound.h"
 #include "MOTOR.h"
 #include "MPU6050.h"
 #include "ENCODER.h"
-#include "CC2530.h"
 
 // 软件
 #include "MyTask.h"
 #include "Delay.h"
 #include "Receive.h"
 #include "Manual.h"
+#include "Data.h"
 
 // 外设
 #include "USART.h"

@@ -1,20 +1,20 @@
-#ifndef __Reply_H
-#define __Reply_H
+// #ifndef __Reply_H
+// #define __Reply_H
 
-// MCU型号
-#include "stm32f10x.h"
+// // MCU型号
+// #include "stm32f10x.h"
 
-// RTOS
-#include "FreeRTOS.h"
-#include "FreeRTOSConfig.h"
-#include "task.h"
+// // RTOS
+// #include "FreeRTOS.h"
+// #include "FreeRTOSConfig.h"
+// #include "task.h"
 
-// 外置硬件
-#include "CC2530.h"
+// // 外置硬件
+// //...
 
-// API
-void Reply_InitPro(void);
-void Reply_SendSuccess(void);
-void Reply_SendFail(void);
+// // API
+// void Reply_InitPro(void);
+// void Reply_SendSuccess(void);
+// void Reply_SendFail(void);
 
-#endif
+// #endif
