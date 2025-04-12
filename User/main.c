@@ -14,6 +14,7 @@ int main(void)
 	GPIO_InitPro();
 	TIM_InitPro();
 	USART_InitPro();
+	ADC_InitPro();
 
 	/*---外件---*/
 	MOTOR_InitPro();

@@ -67,3 +67,4 @@
 .\objects\main.o: .\Software\MyTask\MyTask.h
 .\objects\main.o: .\Software\Receive\Receive.h
 .\objects\main.o: .\Software\Manual\Manual.h
+.\objects\main.o: .\Peripheral\ADC\ADC.h

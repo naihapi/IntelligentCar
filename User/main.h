@@ -27,5 +27,6 @@
 #include "TIM.h"
 #include "GPIO.h"
 #include "IIC.h"
+#include "ADC.h"
 
 #endif

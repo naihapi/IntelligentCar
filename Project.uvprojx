@@ -340,7 +340,7 @@
               <MiscControls>--no-multibyte-chars</MiscControls>
               <Define>USE_STDPERIPH_DRIVER STM32F10X_MD MPU6050</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\Library;.\System;.\User;.\Peripheral;.\Hardware;.\Peripheral\GPIO;.\Peripheral\TIM;.\Peripheral\IIC;.\Peripheral\ENCODER;.\Peripheral\USART;.\Hardware\MOTOR;.\Hardware\MPU6050;.\Hardware\UltraSound;.\Hardware\CC2530;.\Software;.\Software\PID;.\Software\MyTask;.\Software\DMP;.\Software\Delay;.\Software\Receive;.\Software\Manual;.\Software\Reply;.\FreeRTOS\FreeRTOS_CORE;.\FreeRTOS\FreeRTOS_PORT;.\FreeRTOS\FreeRTOS_CORE\include</IncludePath>
+              <IncludePath>.\Start;.\Library;.\System;.\User;.\Peripheral;.\Hardware;.\Peripheral\GPIO;.\Peripheral\TIM;.\Peripheral\IIC;.\Peripheral\ENCODER;.\Peripheral\USART;.\Peripheral\ADC;.\Hardware\MOTOR;.\Hardware\MPU6050;.\Hardware\UltraSound;.\Hardware\CC2530;.\Software;.\Software\PID;.\Software\MyTask;.\Software\DMP;.\Software\Delay;.\Software\Receive;.\Software\Manual;.\Software\Reply;.\FreeRTOS\FreeRTOS_CORE;.\FreeRTOS\FreeRTOS_PORT;.\FreeRTOS\FreeRTOS_CORE\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -718,6 +718,16 @@
               <FileName>ENCODER.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Peripheral\ENCODER\ENCODER.h</FilePath>
+            </File>
+            <File>
+              <FileName>ADC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Peripheral\ADC\ADC.c</FilePath>
+            </File>
+            <File>
+              <FileName>ADC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Peripheral\ADC\ADC.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -404,6 +404,29 @@ void GPIO_USART_Init(void)
 }
 
 /**
+ * @brief 模转数初始化
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note ITR9909左侧：PA5
+ * @note ITR9909中间：PA4
+ * @note ITR9909右侧：PA0
+ */
+void GPIO_ADC_Init(void)
+{
+    // 开启时钟
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+    GPIO_InitTypeDef GPIO_InitStructure;
+
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_4 | GPIO_Pin_5;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+}
+
+/**
  * @brief IO引脚初始化
  *
  * @param 无
@@ -415,6 +438,7 @@ void GPIO_USART_Init(void)
 void GPIO_InitPro(void)
 {
     GPIO_IIC_Init();
+    GPIO_ADC_Init();
     // GPIO_ENCODER_Init();
     GPIO_MPU6050_Init();
 
@@ -423,5 +447,4 @@ void GPIO_InitPro(void)
 
     GPIO_LED_Init();
     GPIO_Buzzer_Init();
-    // GPIO_UltraSound_Init();
 }
