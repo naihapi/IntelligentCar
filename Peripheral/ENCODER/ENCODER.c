@@ -1,30 +1,53 @@
 #include "ENCODER.h"
 
-int16_t ENCODER_CNT = 0;   // 编码器计数值(-65534~65535)
-float ENCODER_Speed = 0.0; // 编码器速度(CM/ms)
+uint16_t L_ENCODER_CNT = 0; // 无论正或反转一圈,都产生1400个计数
+uint16_t R_ENCODER_CNT = 0; // 无论正或反转一圈,都产生1400个计数
 
 void ENCODER_InitPro(void) {}
 
-/**
- * @brief 获取编码数据
- *
- * @param 无
- *
- * @retval 无
- *
- * @note 在任务中，每100ms获取一次编码计数值
- * @note 编码数值存储到全局变量ENCODER_Speed中
- * @note 后续版本，更改为消息队列处理
- */
-void ENCODER_Collection_CodeData(void)
+void EXTI9_5_IRQHandler(void)
 {
-    TIM_Encoder_GetCount(&ENCODER_CNT);
-    ENCODER_Speed = (float)ENCODER_CNT / ENCODER_OneRound_CNT * ENCODER_WheelLengt;
-    TIM_Encoder_SetCount(0);
-}
+    // E1A-PB6
+    if (EXTI_GetITStatus(EXTI_Line6) == SET)
+    {
+        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_6) == 0)
+        {
+            L_ENCODER_CNT++;
+            GPIO_LED_TipsLED(1);
+        }
+        EXTI_ClearITPendingBit(EXTI_Line6);
+    }
 
-// CM/ms
-void ENCODER_GetSpeed(float *speed)
-{
-    *speed = ENCODER_Speed;
+    // E1B-PB7
+    if (EXTI_GetITStatus(EXTI_Line7) == SET)
+    {
+        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_7) == 0)
+        {
+            L_ENCODER_CNT++;
+            GPIO_LED_TipsLED(1);
+        }
+        EXTI_ClearITPendingBit(EXTI_Line7);
+    }
+
+    // E2A-PB8
+    if (EXTI_GetITStatus(EXTI_Line8) == SET)
+    {
+        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_8) == 0)
+        {
+            R_ENCODER_CNT++;
+            GPIO_LED_TipsLED(1);
+        }
+        EXTI_ClearITPendingBit(EXTI_Line8);
+    }
+
+    // E2A-PB9
+    if (EXTI_GetITStatus(EXTI_Line9) == SET)
+    {
+        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9) == 0)
+        {
+            R_ENCODER_CNT++;
+            GPIO_LED_TipsLED(1);
+        }
+        EXTI_ClearITPendingBit(EXTI_Line9);
+    }
 }

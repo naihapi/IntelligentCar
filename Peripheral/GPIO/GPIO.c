@@ -244,29 +244,54 @@ void GPIO_MOTOR_Init(void)
  *
  * @retval 无
  *
- * @note 左侧车轮 PB6=E2A=TIM4_CH1|PB7=E2B=TIM4_CH2
- * @note 右侧车轮 PA8=E1B=TIM1_CH1|PA9=E1A=TIM1_CH2
+ * @note 左侧车轮 PB6=E1A PB7=E2B
+ * @note 右侧车轮 PB8=E1B PB9=E2A
+ * @note 编码AB相均采用边沿中断计数获取
+ * @note Tips：配置
  */
 void GPIO_ENCODER_Init(void)
 {
     // 开启时钟
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
 
     // 结构体定义
     GPIO_InitTypeDef GPIO_InitStructure;
+    EXTI_InitTypeDef EXTI_InitStructure;
+    NVIC_InitTypeDef NVIC_InitStructure;
 
-    // 左侧车轮 PB6=E2A=TIM4_CH1|PB7=E2B=TIM4_CH2
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    // 左侧车轮 PB6=E1A PB7=E1B
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
 
-    // 右侧车轮 PA8=E1B=TIM1_CH1|PA9=E1A=TIM1_CH2
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    // 右侧车轮 PB8=E2A PB9=E2B
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
+    GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+    // 外部中断线配置
+    GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, GPIO_PinSource6);
+    GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, GPIO_PinSource7);
+    GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, GPIO_PinSource8);
+    GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, GPIO_PinSource9);
+
+    EXTI_ClearFlag(EXTI_Line6 | EXTI_Line7 | EXTI_Line8 | EXTI_Line9);
+
+    // 外部中断配置
+    EXTI_InitStructure.EXTI_Line = EXTI_Line6 | EXTI_Line7 | EXTI_Line8 | EXTI_Line9;
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
+    EXTI_Init(&EXTI_InitStructure);
+
+    // 中断向量配置
+    NVIC_InitStructure.NVIC_IRQChannel = EXTI9_5_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3;
+    NVIC_Init(&NVIC_InitStructure);
 }
 
 /**
@@ -359,6 +384,8 @@ void GPIO_LED_Init(void)
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+    GPIO_LED_TipsLED(0);
 }
 
 /**
@@ -439,8 +466,8 @@ void GPIO_InitPro(void)
 {
     GPIO_IIC_Init();
     GPIO_ADC_Init();
-    // GPIO_ENCODER_Init();
-    GPIO_MPU6050_Init();
+    GPIO_ENCODER_Init();
+    // GPIO_MPU6050_Init();
 
     GPIO_MOTOR_Init();
     GPIO_USART_Init();

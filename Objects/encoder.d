@@ -30,6 +30,9 @@
 .\objects\encoder.o: .\Library\stm32f10x_wwdg.h
 .\objects\encoder.o: .\Library\misc.h
 .\objects\encoder.o: .\Peripheral\TIM\TIM.h
+.\objects\encoder.o: .\Peripheral\GPIO\GPIO.h
+.\objects\encoder.o: .\Software\Delay\Delay.h
+.\objects\encoder.o: .\Peripheral\GPIO\GPIO.h
 .\objects\encoder.o: .\FreeRTOS\FreeRTOS_CORE\include\FreeRTOS.h
 .\objects\encoder.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\encoder.o: .\User\FreeRTOSConfig.h

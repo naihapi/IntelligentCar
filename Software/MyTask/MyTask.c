@@ -138,8 +138,6 @@ void TASK10(void *pvParameters)
 {
     while (1)
     {
-        ENCODER_Collection_CodeData();
-        vTaskDelay(100);
     }
 }
 
