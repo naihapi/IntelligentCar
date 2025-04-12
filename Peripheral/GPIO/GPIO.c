@@ -130,7 +130,7 @@ uint8_t GPIO_SDA_Read(void)
  */
 void GPIO_LED_TipsLED(uint8_t State)
 {
-    GPIO_WriteBit(GPIOA, GPIO_Pin_4, (BitAction)State);
+    GPIO_WriteBit(GPIOA, GPIO_Pin_10, (BitAction)State);
 }
 
 /**
@@ -144,7 +144,7 @@ void GPIO_LED_TipsLED(uint8_t State)
  */
 void GPIO_Buzzer_Config(uint8_t State)
 {
-    GPIO_WriteBit(GPIOA, GPIO_Pin_5, (BitAction)State);
+    GPIO_WriteBit(GPIOA, GPIO_Pin_8, (BitAction)State);
 }
 
 /**
@@ -165,7 +165,7 @@ void GPIO_Buzzer_Init(void)
     GPIO_InitTypeDef GPIO_InitStructure;
 
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 }
@@ -345,34 +345,18 @@ void GPIO_MPU6050_Init(void)
  * @retval 无
  *
  * @note PA4-提示灯
- * @note PC13-后车灯
- * @note PB13-前车灯
  */
 void GPIO_LED_Init(void)
 {
     // 开启时钟
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
 
     // 结构体定义
     GPIO_InitTypeDef GPIO_InitStructure;
 
-    // 后车灯
+    // 提示灯
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOC, &GPIO_InitStructure);
-
-    // 前车灯
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-    // 指示灯
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 }
@@ -437,7 +421,7 @@ void GPIO_InitPro(void)
     GPIO_MOTOR_Init();
     GPIO_USART_Init();
 
-    // GPIO_LED_Init();
-    // GPIO_Buzzer_Init();
+    GPIO_LED_Init();
+    GPIO_Buzzer_Init();
     // GPIO_UltraSound_Init();
 }

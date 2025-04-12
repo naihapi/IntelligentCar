@@ -26,7 +26,12 @@ void TASK1(void *pvParameters)
 {
     while (1)
     {
-        // UltraSound_Function();
+        GPIO_Buzzer_Config(1);
+        GPIO_LED_TipsLED(1);
+        vTaskDelay(500);
+
+        GPIO_Buzzer_Config(0);
+        GPIO_LED_TipsLED(0);
         vTaskDelay(500);
     }
 }
