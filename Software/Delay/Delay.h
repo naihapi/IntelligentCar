@@ -8,7 +8,7 @@
 #include "GPIO.h"
 
 // 变量
-extern uint8_t Delay_Flag;
+extern volatile uint32_t Delay_CNT;
 
 // API
 void Delay_us(uint32_t xus);

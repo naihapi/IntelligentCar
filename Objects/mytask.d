@@ -57,6 +57,7 @@
 .\objects\mytask.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\mytask.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\mytask.o: .\Software\PID\PID.h
+.\objects\mytask.o: .\Peripheral\ADC\ADC.h
 .\objects\mytask.o: .\Hardware\MPU6050\MPU6050.h
 .\objects\mytask.o: .\Software\Manual\Manual.h
 .\objects\mytask.o: .\Hardware\MPU6050\MPU6050_Reg.h

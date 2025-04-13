@@ -111,10 +111,10 @@ void TASK7(void *pvParameters)
 {
     while (1)
     {
-        vTaskDelay(1);
+        ADC_ITR9909_ThresholdCompare(2000, 300);
     }
 }
-
+uint8_t flag = 0;
 /**
  * @brief 任务8
  *
@@ -122,11 +122,39 @@ void TASK7(void *pvParameters)
  */
 void TASK8(void *pvParameters)
 {
-    int value = 0;
+    int SpeedExecution = 0;                     // 速度执行量
+    int L_ItrExecution = 0, R_ItrExecution = 0; // 两侧对管执行量
+    int RealOut_Left = 0, RealOut_Right = 0;    // 最终电机输出数值
     while (1)
     {
-        value = PID_RetExecutionQuantity_SpeedControl(20);
-        MOTOR_Pulse_Config(value, value);
+        // 获取速度闭环执行量
+        SpeedExecution = PID_RetExecutionQuantity_SpeedControl(20);
+
+        // 默认情况下，最终输出量=速度执行量
+        RealOut_Left = RealOut_Right = SpeedExecution;
+
+        if (ADC_Threshold_Flag == 2)
+        {
+            // 获取对管执行量
+            PID_RetExecutionQuantity_vITRControl(&L_ItrExecution, &R_ItrExecution);
+
+            // 右侧对管输出执行量
+            RealOut_Left -= R_ItrExecution;
+            RealOut_Right += R_ItrExecution;
+
+            // 左侧对管输出执行量
+            RealOut_Left += L_ItrExecution;
+            RealOut_Right -= L_ItrExecution;
+
+            // 限幅
+            if (RealOut_Left < 0)
+                RealOut_Left = 0;
+            if (RealOut_Right < 0)
+                RealOut_Right = 0;
+        }
+
+        // 输出到电机
+        MOTOR_Pulse_Config(RealOut_Left, RealOut_Right);
     }
 }
 
@@ -184,6 +212,11 @@ void TASK12(void *pvParameters)
 {
     while (1)
     {
+        if (flag == 1)
+        {
+            vTaskDelay(500);
+            flag = 0;
+        }
         vTaskDelay(1);
     }
 }

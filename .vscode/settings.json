@@ -5,6 +5,15 @@
         "array": "c",
         "string_view": "c",
         "usart.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "adc.h": "c",
+        "functional": "c",
+        "optional": "c",
+        "system_error": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "delay.h": "c",
+        "gpio.h": "c"
     }
 }

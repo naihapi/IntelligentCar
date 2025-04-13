@@ -29,3 +29,6 @@
 .\objects\adc.o: .\Library\stm32f10x_usart.h
 .\objects\adc.o: .\Library\stm32f10x_wwdg.h
 .\objects\adc.o: .\Library\misc.h
+.\objects\adc.o: .\Software\Delay\Delay.h
+.\objects\adc.o: .\Peripheral\GPIO\GPIO.h
+.\objects\adc.o: .\Software\Delay\Delay.h

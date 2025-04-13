@@ -1,6 +1,8 @@
 #include "ADC.h"
 
-uint16_t ADC_ITR9909_Value[3];
+uint16_t ADC_ITR9909_Value[3];       // 对管数值(ADC_ITRBuffer_xxxValue)
+uint8_t ADC_Threshold_Flag = 2;      // 对管阈值(0：小于最低阈值，1：大于最高阈值，2：没有超过阈值)
+uint32_t ADC_OverThreshold_Time = 0; // 记录超出阈值的时间
 
 /**
  * @brief 模转数初始化
@@ -68,6 +70,64 @@ void ADC_ITR9909_Init(void)
     ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
 
+/**
+ * @brief 阈值比较
+ *
+ * @param max 最大阈值
+ * @param mini 最小阈值
+ *
+ * @retval 无
+ *
+ * @note 2个或3个对管平均值<最低阈值，输出0
+ * @note 2个或3个对管平均值>最高阈值，输出1
+ * @note 2个或3个对管平均值不超过阈值，输出2
+ *
+ */
+void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
+{
+    uint16_t average = 0;
+
+    average = (ADC_ITR9909_Value[ADC_ITRBuffer_LeftValue] +
+               ADC_ITR9909_Value[ADC_ITRBuffer_MiddleValue] +
+               ADC_ITR9909_Value[ADC_ITRBuffer_RightValue]) /
+              3.0;
+    if (average < mini)
+    {
+        ADC_Threshold_Flag = 0;
+    }
+    else if (average > max)
+    {
+        ADC_Threshold_Flag = 1;
+    }
+
+    average = (ADC_ITR9909_Value[ADC_ITRBuffer_LeftValue] +
+               ADC_ITR9909_Value[ADC_ITRBuffer_MiddleValue]) /
+              2.0;
+    if (average < mini)
+    {
+        ADC_Threshold_Flag = 0;
+    }
+    else if (average > max)
+    {
+        ADC_Threshold_Flag = 1;
+        Delay_Getxms((unsigned long *)&ADC_OverThreshold_Time);
+    }
+
+    average = (ADC_ITR9909_Value[ADC_ITRBuffer_MiddleValue] +
+               ADC_ITR9909_Value[ADC_ITRBuffer_RightValue]) /
+              2.0;
+    if (average < mini)
+    {
+        ADC_Threshold_Flag = 0;
+    }
+    else if (average > max)
+    {
+        ADC_Threshold_Flag = 1;
+        Delay_Getxms((unsigned long *)&ADC_OverThreshold_Time);
+    }
+
+    ADC_Threshold_Flag = 2;
+}
 void ADC_InitPro(void)
 {
     ADC_ITR9909_Init();

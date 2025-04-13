@@ -29,10 +29,11 @@
 .\objects\pid.o: .\Library\stm32f10x_usart.h
 .\objects\pid.o: .\Library\stm32f10x_wwdg.h
 .\objects\pid.o: .\Library\misc.h
-.\objects\pid.o: .\Hardware\MOTOR\MOTOR.h
-.\objects\pid.o: .\Peripheral\GPIO\GPIO.h
+.\objects\pid.o: .\Peripheral\ADC\ADC.h
 .\objects\pid.o: .\Software\Delay\Delay.h
 .\objects\pid.o: .\Peripheral\GPIO\GPIO.h
+.\objects\pid.o: .\Software\Delay\Delay.h
+.\objects\pid.o: .\Hardware\MOTOR\MOTOR.h
 .\objects\pid.o: .\Peripheral\TIM\TIM.h
 .\objects\pid.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\pid.o: .\Hardware\MPU6050\MPU6050.h

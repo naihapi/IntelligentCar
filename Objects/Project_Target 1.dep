@@ -810,7 +810,7 @@ I (.\Library\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
-I (.\Software\Delay\Delay.h)(0x67B0DCB8)
+I (.\Software\Delay\Delay.h)(0x67FB7213)
 I (.\Peripheral\GPIO\GPIO.h)(0x67F9D01B)
 F (.\Peripheral\GPIO\GPIO.h)(0x67F9D01B)()
 F (.\Peripheral\TIM\TIM.c)(0x67FA0DD0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\tim.o --omf_browse .\objects\tim.crf --depend .\objects\tim.d)
@@ -875,7 +875,7 @@ I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 I (.\Peripheral\GPIO\GPIO.h)(0x67F9D01B)
-I (.\Software\Delay\Delay.h)(0x67B0DCB8)
+I (.\Software\Delay\Delay.h)(0x67FB7213)
 F (.\Peripheral\IIC\IIC.h)(0x67BEBF73)()
 F (.\Peripheral\USART\USART.c)(0x67F8E5BB)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\usart.o --omf_browse .\objects\usart.crf --depend .\objects\usart.d)
 I (Peripheral\USART\USART.h)(0x67F8E666)
@@ -943,7 +943,7 @@ I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 I (.\Peripheral\TIM\TIM.h)(0x67D1895A)
 I (.\Peripheral\GPIO\GPIO.h)(0x67F9D01B)
-I (.\Software\Delay\Delay.h)(0x67B0DCB8)
+I (.\Software\Delay\Delay.h)(0x67FB7213)
 I (.\FreeRTOS\FreeRTOS_CORE\include\FreeRTOS.h)(0x673AE849)
 I (D:\Keil5\ARM\ARMCC\include\stddef.h)(0x5E8E3CC2)
 I (.\User\FreeRTOSConfig.h)(0x67D9A030)
@@ -955,8 +955,8 @@ I (.\FreeRTOS\FreeRTOS_CORE\include\mpu_wrappers.h)(0x64020E50)
 I (.\FreeRTOS\FreeRTOS_CORE\include\task.h)(0x64020E50)
 I (.\FreeRTOS\FreeRTOS_CORE\include\list.h)(0x64020E50)
 F (.\Peripheral\ENCODER\ENCODER.h)(0x67FB2FFB)()
-F (.\Peripheral\ADC\ADC.c)(0x67F9E643)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\adc.o --omf_browse .\objects\adc.crf --depend .\objects\adc.d)
-I (Peripheral\ADC\ADC.h)(0x67F9E6A0)
+F (.\Peripheral\ADC\ADC.c)(0x67FB9ED4)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\adc.o --omf_browse .\objects\adc.crf --depend .\objects\adc.d)
+I (Peripheral\ADC\ADC.h)(0x67FB9EA9)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
 I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
@@ -985,7 +985,9 @@ I (.\Library\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
-F (.\Peripheral\ADC\ADC.h)(0x67F9E6A0)()
+I (.\Software\Delay\Delay.h)(0x67FB7213)
+I (.\Peripheral\GPIO\GPIO.h)(0x67F9D01B)
+F (.\Peripheral\ADC\ADC.h)(0x67FB9EA9)()
 F (.\Hardware\MOTOR\MOTOR.c)(0x67FB27F9)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\motor.o --omf_browse .\objects\motor.crf --depend .\objects\motor.d)
 I (Hardware\MOTOR\MOTOR.h)(0x67FB251A)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
@@ -1017,7 +1019,7 @@ I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 I (.\Peripheral\GPIO\GPIO.h)(0x67F9D01B)
-I (.\Software\Delay\Delay.h)(0x67B0DCB8)
+I (.\Software\Delay\Delay.h)(0x67FB7213)
 I (.\Peripheral\TIM\TIM.h)(0x67D1895A)
 I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
 F (.\Hardware\MOTOR\MOTOR.h)(0x67FB251A)()
@@ -1056,7 +1058,7 @@ I (.\Software\DMP\inv_mpu.h)(0x67BEC2A7)
 I (.\Software\DMP\inv_mpu_dmp_motion_driver.h)(0x671260A5)
 I (.\Peripheral\IIC\IIC.h)(0x67BEBF73)
 I (.\Peripheral\GPIO\GPIO.h)(0x67F9D01B)
-I (.\Software\Delay\Delay.h)(0x67B0DCB8)
+I (.\Software\Delay\Delay.h)(0x67FB7213)
 I (.\Peripheral\TIM\TIM.h)(0x67D1895A)
 I (.\Peripheral\ENCODER\ENCODER.h)(0x67FB2FFB)
 I (.\FreeRTOS\FreeRTOS_CORE\include\FreeRTOS.h)(0x673AE849)
@@ -1073,14 +1075,15 @@ I (.\Peripheral\USART\USART.h)(0x67F8E666)
 I (D:\Keil5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
 I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x5E8E3CC2)
-I (.\Software\PID\PID.h)(0x67FB2FDF)
+I (.\Software\PID\PID.h)(0x67FB3671)
+I (.\Peripheral\ADC\ADC.h)(0x67FB9EA9)
 I (.\Hardware\MOTOR\MOTOR.h)(0x67FB251A)
 I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
 I (.\Hardware\MPU6050\MPU6050.h)(0x67DD109F)
 I (.\Software\Manual\Manual.h)(0x67F9D023)
 I (Hardware\MPU6050\MPU6050_Reg.h)(0x67BEBFAA)
 F (.\Hardware\MPU6050\MPU6050.h)(0x67DD109F)()
-F (.\Software\MyTask\MyTask.c)(0x67FB3032)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\mytask.o --omf_browse .\objects\mytask.crf --depend .\objects\mytask.d)
+F (.\Software\MyTask\MyTask.c)(0x67FB9EA7)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\mytask.o --omf_browse .\objects\mytask.crf --depend .\objects\mytask.d)
 I (Software\MyTask\MyTASK.h)(0x67FB2035)
 I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (D:\Keil5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
@@ -1124,7 +1127,7 @@ I (.\FreeRTOS\FreeRTOS_CORE\include\task.h)(0x64020E50)
 I (.\FreeRTOS\FreeRTOS_CORE\include\list.h)(0x64020E50)
 I (.\Hardware\MOTOR\MOTOR.h)(0x67FB251A)
 I (.\Peripheral\GPIO\GPIO.h)(0x67F9D01B)
-I (.\Software\Delay\Delay.h)(0x67B0DCB8)
+I (.\Software\Delay\Delay.h)(0x67FB7213)
 I (.\Peripheral\TIM\TIM.h)(0x67D1895A)
 I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
 I (.\Hardware\MPU6050\MPU6050.h)(0x67DD109F)
@@ -1136,14 +1139,15 @@ I (.\Peripheral\ENCODER\ENCODER.h)(0x67FB2FFB)
 I (.\Peripheral\USART\USART.h)(0x67F8E666)
 I (D:\Keil5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
 I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x5E8E3CC2)
-I (.\Software\PID\PID.h)(0x67FB2FDF)
+I (.\Software\PID\PID.h)(0x67FB3671)
+I (.\Peripheral\ADC\ADC.h)(0x67FB9EA9)
 I (.\Software\Manual\Manual.h)(0x67F9D023)
 I (.\Hardware\MPU6050\MPU6050_Reg.h)(0x67BEBFAA)
 I (.\Software\Receive\Receive.h)(0x67F9D046)
 I (.\Software\Data\Data.h)(0x67FA7A58)
 F (.\Software\MyTask\MyTask.h)(0x67FB2035)()
-F (.\Software\PID\PID.c)(0x67FB3076)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\pid.o --omf_browse .\objects\pid.crf --depend .\objects\pid.d)
-I (Software\PID\PID.h)(0x67FB2FDF)
+F (.\Software\PID\PID.c)(0x67FB8F78)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\pid.o --omf_browse .\objects\pid.crf --depend .\objects\pid.d)
+I (Software\PID\PID.h)(0x67FB3671)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
 I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
@@ -1172,9 +1176,10 @@ I (.\Library\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
-I (.\Hardware\MOTOR\MOTOR.h)(0x67FB251A)
+I (.\Peripheral\ADC\ADC.h)(0x67FB9EA9)
+I (.\Software\Delay\Delay.h)(0x67FB7213)
 I (.\Peripheral\GPIO\GPIO.h)(0x67F9D01B)
-I (.\Software\Delay\Delay.h)(0x67B0DCB8)
+I (.\Hardware\MOTOR\MOTOR.h)(0x67FB251A)
 I (.\Peripheral\TIM\TIM.h)(0x67D1895A)
 I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
 I (.\Hardware\MPU6050\MPU6050.h)(0x67DD109F)
@@ -1197,12 +1202,12 @@ I (.\Peripheral\USART\USART.h)(0x67F8E666)
 I (D:\Keil5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
 I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x5E8E3CC2)
-I (.\Software\PID\PID.h)(0x67FB2FDF)
+I (.\Software\PID\PID.h)(0x67FB3671)
 I (.\Hardware\MPU6050\MPU6050_Reg.h)(0x67BEBFAA)
 I (.\Software\Manual\Manual.h)(0x67F9D023)
-F (.\Software\PID\PID.h)(0x67FB2FDF)()
-F (.\Software\Delay\Delay.c)(0x67BEBFDD)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\delay_1.o --omf_browse .\objects\delay_1.crf --depend .\objects\delay_1.d)
-I (Software\Delay\Delay.h)(0x67B0DCB8)
+F (.\Software\PID\PID.h)(0x67FB3671)()
+F (.\Software\Delay\Delay.c)(0x67FB7031)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\delay_1.o --omf_browse .\objects\delay_1.crf --depend .\objects\delay_1.d)
+I (Software\Delay\Delay.h)(0x67FB7213)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
 I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
@@ -1232,8 +1237,8 @@ I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 I (.\Peripheral\GPIO\GPIO.h)(0x67F9D01B)
-I (.\Software\Delay\Delay.h)(0x67B0DCB8)
-F (.\Software\Delay\Delay.h)(0x67B0DCB8)()
+I (.\Software\Delay\Delay.h)(0x67FB7213)
+F (.\Software\Delay\Delay.h)(0x67FB7213)()
 F (.\Software\DMP\dmpKey.h)(0x67134CCE)()
 F (.\Software\DMP\dmpmap.h)(0x67134CCC)()
 F (.\Software\DMP\inv_mpu.c)(0x67BEBF59)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\inv_mpu.o --omf_browse .\objects\inv_mpu.crf --depend .\objects\inv_mpu.d)
@@ -1272,7 +1277,7 @@ I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 I (.\Peripheral\GPIO\GPIO.h)(0x67F9D01B)
-I (.\Software\Delay\Delay.h)(0x67B0DCB8)
+I (.\Software\Delay\Delay.h)(0x67FB7213)
 F (.\Software\DMP\inv_mpu.h)(0x67BEC2A7)()
 F (.\Software\DMP\inv_mpu_dmp_motion_driver.c)(0x67BEBF4E)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\inv_mpu_dmp_motion_driver.o --omf_browse .\objects\inv_mpu_dmp_motion_driver.crf --depend .\objects\inv_mpu_dmp_motion_driver.d)
 I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
@@ -1313,7 +1318,7 @@ I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 I (.\Peripheral\GPIO\GPIO.h)(0x67F9D01B)
-I (.\Software\Delay\Delay.h)(0x67B0DCB8)
+I (.\Software\Delay\Delay.h)(0x67FB7213)
 F (.\Software\DMP\inv_mpu_dmp_motion_driver.h)(0x671260A5)()
 F (.\Software\Receive\Receive.c)(0x67F9D041)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\receive.o --omf_browse .\objects\receive.crf --depend .\objects\receive.d)
 F (.\Software\Receive\Receive.h)(0x67F9D046)()
@@ -1399,7 +1404,7 @@ I (.\FreeRTOS\FreeRTOS_CORE\include\task.h)(0x64020E50)
 I (.\FreeRTOS\FreeRTOS_CORE\include\list.h)(0x64020E50)
 I (.\Hardware\MOTOR\MOTOR.h)(0x67FB251A)
 I (.\Peripheral\GPIO\GPIO.h)(0x67F9D01B)
-I (.\Software\Delay\Delay.h)(0x67B0DCB8)
+I (.\Software\Delay\Delay.h)(0x67FB7213)
 I (.\Peripheral\TIM\TIM.h)(0x67D1895A)
 I (D:\Keil5\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
 I (.\Hardware\MPU6050\MPU6050.h)(0x67DD109F)
@@ -1411,13 +1416,13 @@ I (.\Peripheral\ENCODER\ENCODER.h)(0x67FB2FFB)
 I (.\Peripheral\USART\USART.h)(0x67F8E666)
 I (D:\Keil5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
 I (D:\Keil5\ARM\ARMCC\include\stdarg.h)(0x5E8E3CC2)
-I (.\Software\PID\PID.h)(0x67FB2FDF)
+I (.\Software\PID\PID.h)(0x67FB3671)
+I (.\Peripheral\ADC\ADC.h)(0x67FB9EA9)
 I (.\Software\Manual\Manual.h)(0x67F9D023)
 I (.\Hardware\MPU6050\MPU6050_Reg.h)(0x67BEBFAA)
 I (.\Software\Data\Data.h)(0x67FA7A58)
 I (.\Software\MyTask\MyTask.h)(0x67FB2035)
 I (.\Software\Receive\Receive.h)(0x67F9D046)
-I (.\Peripheral\ADC\ADC.h)(0x67F9E6A0)
 F (.\User\stm32f10x_conf.h)(0x4D99A59E)()
 F (.\User\stm32f10x_it.c)(0x673AC3F7)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\System -I .\User -I .\Peripheral -I .\Hardware -I .\Peripheral\GPIO -I .\Peripheral\TIM -I .\Peripheral\IIC -I .\Peripheral\ENCODER -I .\Peripheral\USART -I .\Peripheral\ADC -I .\Hardware\MOTOR -I .\Hardware\MPU6050 -I .\Hardware\UltraSound -I .\Hardware\CC2530 -I .\Software -I .\Software\PID -I .\Software\MyTask -I .\Software\DMP -I .\Software\Delay -I .\Software\Receive -I .\Software\Manual -I .\Software\Reply -I .\Software\Data -I .\FreeRTOS\FreeRTOS_CORE -I .\FreeRTOS\FreeRTOS_PORT -I .\FreeRTOS\FreeRTOS_CORE\include --no-multibyte-chars-ID:\Keil5_Pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD -DMPU6050-o .\objects\stm32f10x_it.o --omf_browse .\objects\stm32f10x_it.crf --depend .\objects\stm32f10x_it.d)
 I (User\stm32f10x_it.h)(0x673AC3E7)

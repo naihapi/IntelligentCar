@@ -10,7 +10,7 @@ float PID_Speed_Error_Last = 0;
 float PID_Speed_Error_Difference = 0;
 
 /*转向环-对管控制*/
-float PID_vITR_P = 0, PID_vITR_I = 0, PID_vITR_D = 0;
+float PID_vITR_P = 600, PID_vITR_I = 5, PID_vITR_D = 100;
 float PID_vITR_Error = 0;
 float PID_vITR_Error_Sum = 0;
 float PID_vITR_Error_Last = 0;
@@ -112,14 +112,9 @@ int PID_Vertical_ITR9909_Function(float NowValue, float TargetValue)
 
     // 误差值累加（积分I）
     PID_vITR_Error_Sum += PID_vITR_Error;
-    if (PID_vITR_Error_Sum > 3000)
-    {
-        PID_vITR_Error_Sum = 3000;
-    }
-    if (PID_vITR_Error_Sum < -3000)
-    {
-        PID_vITR_Error_Sum = -3000;
-    }
+
+    // 误差值累加限幅(±3000)
+    PID_Limit(&PID_vITR_Error_Sum, 3000);
 
     // 误差值的差值（微分D）
     PID_vITR_Error_Difference = PID_vITR_Error - PID_vITR_Error_Last;
@@ -131,4 +126,15 @@ int PID_Vertical_ITR9909_Function(float NowValue, float TargetValue)
     return PID_vITR_P * PID_vITR_Error +
            PID_vITR_I * PID_vITR_Error_Sum +
            PID_vITR_D * PID_vITR_Error_Difference;
+}
+
+void PID_RetExecutionQuantity_vITRControl(int *Left_ExecutionQuantity, int *Right_ExecutionQuantity)
+{
+    // 获取对管数值
+    uint16_t ITR_Left = ADC_ITR9909_Value[ADC_ITRBuffer_LeftValue];
+    uint16_t ITR_Right = ADC_ITR9909_Value[ADC_ITRBuffer_RightValue];
+
+    // 返回执行量
+    *Left_ExecutionQuantity = PID_Vertical_ITR9909_Function(ITR_Left, PID_ITROFFSIDE_TargetValue);
+    *Right_ExecutionQuantity = PID_Vertical_ITR9909_Function(ITR_Right, PID_ITROFFSIDE_TargetValue);
 }
