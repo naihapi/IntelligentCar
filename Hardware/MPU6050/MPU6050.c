@@ -398,6 +398,23 @@ void MPU6050_FallDown_Handler(void)
 }
 
 /**
+ * @brief 计算对角度
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note 依据MPU6050角度-180°~180°
+ */
+int16_t MPU6050_OppositeAngle(int16_t angle)
+{
+	angle += 180;
+	angle -= 360;
+
+	return angle;
+}
+
+/**
  * @brief MPU6050初始化
  *
  * @param 无

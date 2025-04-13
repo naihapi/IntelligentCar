@@ -14,6 +14,7 @@
         "type_traits": "c",
         "utility": "c",
         "delay.h": "c",
-        "gpio.h": "c"
+        "gpio.h": "c",
+        "mpu6050_reg.h": "c"
     }
 }

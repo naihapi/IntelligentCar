@@ -29,5 +29,6 @@
 .\objects\delay_1.o: .\Library\stm32f10x_usart.h
 .\objects\delay_1.o: .\Library\stm32f10x_wwdg.h
 .\objects\delay_1.o: .\Library\misc.h
+.\objects\delay_1.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\delay_1.o: .\Peripheral\GPIO\GPIO.h
 .\objects\delay_1.o: .\Software\Delay\Delay.h

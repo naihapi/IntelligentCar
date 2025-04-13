@@ -1,6 +1,7 @@
 #include "Delay.h"
 
-volatile uint32_t Delay_CNT = 0;
+volatile uint32_t Delay_CNT = 0;        // 延时计数器(1ms自增一次)
+volatile uint32_t Delay_TimeRecord = 0; // 时间点记录
 
 /**
  * @brief NOP指令微秒级延时
@@ -64,9 +65,42 @@ void Delay_s(uint32_t xs)
  * @note 用于对接DMP解算库
  * @note 由于编译警告，将uint32_t改为unsigned long
  */
-void Delay_Getxms(unsigned long *count)
+uint32_t Delay_Getxms(unsigned long *count)
 {
-    *count = Delay_CNT;
+    if (count != NULL)
+    {
+        *count = Delay_CNT;
+    }
+
+    return Delay_CNT;
+}
+
+/**
+ * @brief 时间节点记录
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note 调用后，会记录当前的运行时间
+ */
+void Delay_TimeLog_Record(void)
+{
+    Delay_TimeRecord = Delay_CNT;
+}
+
+/**
+ * @brief 时间节点获取
+ *
+ * @param 无
+ *
+ * @retval 返回一个毫秒计数值
+ *
+ * @note 获取上一次记录的运行时间
+ */
+uint32_t Delay_TimeLog_Get(void)
+{
+    return Delay_TimeRecord;
 }
 
 /**

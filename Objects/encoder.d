@@ -32,6 +32,7 @@
 .\objects\encoder.o: .\Peripheral\TIM\TIM.h
 .\objects\encoder.o: .\Peripheral\GPIO\GPIO.h
 .\objects\encoder.o: .\Software\Delay\Delay.h
+.\objects\encoder.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\encoder.o: .\Peripheral\GPIO\GPIO.h
 .\objects\encoder.o: .\FreeRTOS\FreeRTOS_CORE\include\FreeRTOS.h
 .\objects\encoder.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h

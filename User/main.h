@@ -21,6 +21,7 @@
 #include "Data.h"
 #include "MyTask.h"
 #include "Delay.h"
+#include "Car.h"
 
 // 外设
 #include "USART.h"

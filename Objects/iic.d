@@ -31,4 +31,5 @@
 .\objects\iic.o: .\Library\misc.h
 .\objects\iic.o: .\Peripheral\GPIO\GPIO.h
 .\objects\iic.o: .\Software\Delay\Delay.h
+.\objects\iic.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\iic.o: .\Peripheral\GPIO\GPIO.h

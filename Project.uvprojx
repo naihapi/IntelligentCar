@@ -340,7 +340,7 @@
               <MiscControls>--no-multibyte-chars</MiscControls>
               <Define>USE_STDPERIPH_DRIVER STM32F10X_MD MPU6050</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\Library;.\System;.\User;.\Peripheral;.\Hardware;.\Peripheral\GPIO;.\Peripheral\TIM;.\Peripheral\IIC;.\Peripheral\ENCODER;.\Peripheral\USART;.\Peripheral\ADC;.\Hardware\MOTOR;.\Hardware\MPU6050;.\Hardware\UltraSound;.\Hardware\CC2530;.\Software;.\Software\PID;.\Software\MyTask;.\Software\DMP;.\Software\Delay;.\Software\Receive;.\Software\Manual;.\Software\Reply;.\Software\Data;.\FreeRTOS\FreeRTOS_CORE;.\FreeRTOS\FreeRTOS_PORT;.\FreeRTOS\FreeRTOS_CORE\include</IncludePath>
+              <IncludePath>.\Start;.\Library;.\System;.\User;.\Peripheral;.\Hardware;.\Peripheral\GPIO;.\Peripheral\TIM;.\Peripheral\IIC;.\Peripheral\ENCODER;.\Peripheral\USART;.\Peripheral\ADC;.\Hardware\MOTOR;.\Hardware\MPU6050;.\Hardware\UltraSound;.\Hardware\CC2530;.\Software;.\Software\PID;.\Software\MyTask;.\Software\DMP;.\Software\Delay;.\Software\Receive;.\Software\Car;.\Software\Reply;.\Software\Data;.\FreeRTOS\FreeRTOS_CORE;.\FreeRTOS\FreeRTOS_PORT;.\FreeRTOS\FreeRTOS_CORE\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -840,16 +840,6 @@
               <FilePath>.\Software\Reply\Reply.h</FilePath>
             </File>
             <File>
-              <FileName>Manual.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Software\Manual\Manual.c</FilePath>
-            </File>
-            <File>
-              <FileName>Manual.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Software\Manual\Manual.h</FilePath>
-            </File>
-            <File>
               <FileName>Data.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Software\Data\Data.c</FilePath>
@@ -858,6 +848,16 @@
               <FileName>Data.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Software\Data\Data.h</FilePath>
+            </File>
+            <File>
+              <FileName>Car.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Software\Car\Car.c</FilePath>
+            </File>
+            <File>
+              <FileName>Car.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Software\Car\Car.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -98,7 +98,13 @@ void TASK6(void *pvParameters)
 {
     while (1)
     {
-        vTaskDelay(1);
+        if (Debug_Flag1 == 1)
+        {
+            GPIO_Buzzer_Config(1);
+            vTaskDelay(200);
+            GPIO_Buzzer_Config(0);
+            Debug_Flag1 = 0;
+        }
     }
 }
 
@@ -114,7 +120,6 @@ void TASK7(void *pvParameters)
         ADC_ITR9909_ThresholdCompare(2000, 300);
     }
 }
-uint8_t flag = 0;
 /**
  * @brief 任务8
  *
@@ -125,6 +130,7 @@ void TASK8(void *pvParameters)
     int SpeedExecution = 0;                     // 速度执行量
     int L_ItrExecution = 0, R_ItrExecution = 0; // 两侧对管执行量
     int RealOut_Left = 0, RealOut_Right = 0;    // 最终电机输出数值
+
     while (1)
     {
         // 获取速度闭环执行量
@@ -133,7 +139,7 @@ void TASK8(void *pvParameters)
         // 默认情况下，最终输出量=速度执行量
         RealOut_Left = RealOut_Right = SpeedExecution;
 
-        if (ADC_Threshold_Flag == 2)
+        if (ADC_ITR9909_Compare() == 2)
         {
             // 获取对管执行量
             PID_RetExecutionQuantity_vITRControl(&L_ItrExecution, &R_ItrExecution);
@@ -151,6 +157,35 @@ void TASK8(void *pvParameters)
                 RealOut_Left = 0;
             if (RealOut_Right < 0)
                 RealOut_Right = 0;
+        }
+        else if (ADC_ITR9909_Compare() == 0)
+        {
+            vTaskDelay(100); // 消抖
+            if (ADC_ITR9909_Compare() == 0)
+            {
+                // 根据运行时间，回退到记录点
+                // MOTOR_Pulse_Config(-RealOut_Left, -RealOut_Right);
+                // vTaskDelay(Delay_TimeLog_Get());
+                while (1)
+                {
+                    MOTOR_Pulse_Config(-RealOut_Left, -RealOut_Right);
+                    if (ADC_ITR9909_Compare() == 1)
+                    {
+                        break;
+                    }
+                }
+
+                Car_SpinStop();
+                MOTOR_Pulse_Config(RealOut_Left, RealOut_Right);
+                vTaskDelay(300);
+                Car_SpinStop();
+                // while (1)
+                // {
+                // }
+
+                Car_BreakLine();
+                Car_SearchLine();
+            }
         }
 
         // 输出到电机
@@ -180,11 +215,11 @@ void TASK10(void *pvParameters)
 {
     while (1)
     {
-        USART2_SendNumber(Real_L_ENCODER_CNT);
+        USART2_SendNumber(MPU6050_Pitch);
         USART2_SendString("\r\n");
-        USART2_SendNumber(Real_R_ENCODER_CNT);
+        USART2_SendNumber(MPU6050_Roll);
         USART2_SendString("\r\n");
-        USART2_SendNumber(ENCODER_Speed);
+        USART2_SendNumber(MPU6050_Yaw);
         USART2_SendString("\r\n");
         vTaskDelay(500);
     }
@@ -212,11 +247,6 @@ void TASK12(void *pvParameters)
 {
     while (1)
     {
-        if (flag == 1)
-        {
-            vTaskDelay(500);
-            flag = 0;
-        }
         vTaskDelay(1);
     }
 }

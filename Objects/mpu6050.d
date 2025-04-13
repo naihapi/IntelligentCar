@@ -35,6 +35,7 @@
 .\objects\mpu6050.o: .\Peripheral\IIC\IIC.h
 .\objects\mpu6050.o: .\Peripheral\GPIO\GPIO.h
 .\objects\mpu6050.o: .\Software\Delay\Delay.h
+.\objects\mpu6050.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\mpu6050.o: .\Peripheral\GPIO\GPIO.h
 .\objects\mpu6050.o: .\Peripheral\TIM\TIM.h
 .\objects\mpu6050.o: .\Peripheral\ENCODER\ENCODER.h
@@ -50,12 +51,10 @@
 .\objects\mpu6050.o: .\FreeRTOS\FreeRTOS_CORE\include\list.h
 .\objects\mpu6050.o: .\Peripheral\USART\USART.h
 .\objects\mpu6050.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\mpu6050.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\mpu6050.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\mpu6050.o: .\Software\PID\PID.h
 .\objects\mpu6050.o: .\Peripheral\ADC\ADC.h
 .\objects\mpu6050.o: .\Hardware\MOTOR\MOTOR.h
 .\objects\mpu6050.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\mpu6050.o: .\Hardware\MPU6050\MPU6050.h
-.\objects\mpu6050.o: .\Software\Manual\Manual.h
 .\objects\mpu6050.o: Hardware\MPU6050\MPU6050_Reg.h

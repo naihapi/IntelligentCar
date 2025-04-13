@@ -59,9 +59,8 @@
 .\objects\mytask.o: .\Software\PID\PID.h
 .\objects\mytask.o: .\Peripheral\ADC\ADC.h
 .\objects\mytask.o: .\Hardware\MPU6050\MPU6050.h
-.\objects\mytask.o: .\Software\Manual\Manual.h
 .\objects\mytask.o: .\Hardware\MPU6050\MPU6050_Reg.h
 .\objects\mytask.o: Software\MyTask\MyTask.h
+.\objects\mytask.o: .\Software\Car\Car.h
 .\objects\mytask.o: .\Software\Receive\Receive.h
-.\objects\mytask.o: .\Software\Manual\Manual.h
 .\objects\mytask.o: .\Software\Data\Data.h

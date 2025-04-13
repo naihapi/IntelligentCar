@@ -30,4 +30,5 @@
 .\objects\gpio.o: .\Library\stm32f10x_wwdg.h
 .\objects\gpio.o: .\Library\misc.h
 .\objects\gpio.o: .\Software\Delay\Delay.h
+.\objects\gpio.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\gpio.o: .\Peripheral\GPIO\GPIO.h

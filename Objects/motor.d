@@ -31,6 +31,7 @@
 .\objects\motor.o: .\Library\misc.h
 .\objects\motor.o: .\Peripheral\GPIO\GPIO.h
 .\objects\motor.o: .\Software\Delay\Delay.h
+.\objects\motor.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\motor.o: .\Peripheral\GPIO\GPIO.h
 .\objects\motor.o: .\Peripheral\TIM\TIM.h
 .\objects\motor.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h

@@ -19,7 +19,7 @@
 #define PID_ITROFFSIDE_TargetValue (float)290.0 // 对管两侧ADC目标值
 
 // 软件
-#include "Manual.h"
+//...
 
 // API
 int PID_RetExecutionQuantity_SpeedControl(float TargetValue);

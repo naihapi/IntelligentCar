@@ -4,6 +4,9 @@
 // MCU型号
 #include "stm32f10x.h"
 
+// 标准库
+#include "stdio.h"
+
 // 外设
 #include "GPIO.h"
 
@@ -14,6 +17,8 @@ extern volatile uint32_t Delay_CNT;
 void Delay_us(uint32_t xus);
 void Delay_ms(uint32_t xms);
 void Delay_s(uint32_t xs);
-void Delay_Getxms(unsigned long *count);
+uint32_t Delay_Getxms(unsigned long *count);
+void Delay_TimeLog_Record(void);
+uint32_t Delay_TimeLog_Get(void);
 
 #endif

@@ -31,6 +31,7 @@
 .\objects\pid.o: .\Library\misc.h
 .\objects\pid.o: .\Peripheral\ADC\ADC.h
 .\objects\pid.o: .\Software\Delay\Delay.h
+.\objects\pid.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\pid.o: .\Peripheral\GPIO\GPIO.h
 .\objects\pid.o: .\Software\Delay\Delay.h
 .\objects\pid.o: .\Hardware\MOTOR\MOTOR.h
@@ -54,8 +55,6 @@
 .\objects\pid.o: .\FreeRTOS\FreeRTOS_CORE\include\list.h
 .\objects\pid.o: .\Peripheral\USART\USART.h
 .\objects\pid.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\pid.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\pid.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\pid.o: .\Software\PID\PID.h
 .\objects\pid.o: .\Hardware\MPU6050\MPU6050_Reg.h
-.\objects\pid.o: .\Software\Manual\Manual.h

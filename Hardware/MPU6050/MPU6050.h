@@ -40,5 +40,6 @@ void MPU6050_ReadReg(uint8_t reg, uint8_t *buf);
 int8_t MPU6050_DMP_Get_Data(float *pitch, float *roll, float *yaw);
 void MPU6050_Remove_YawDeviaction(void);
 float MPU6050_AngleConvert(float Angle);
+int16_t MPU6050_OppositeAngle(int16_t angle);
 
 #endif
