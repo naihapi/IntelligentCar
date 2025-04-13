@@ -1,13 +1,16 @@
 #include "ENCODER.h"
 
-uint16_t L_ENCODER_CNT = 0; // 无论正或反转一圈,都产生1400个计数
-uint16_t R_ENCODER_CNT = 0; // 无论正或反转一圈,都产生1400个计数
-uint8_t ENCODER_Speed = 0;  // 编码电机速度(cm/s)
+// 无论正或反转一圈,都产生1400个计数
+uint16_t Interrupt_L_ENCODER_CNT = 0; // 左侧中断编码计数
+uint16_t Interrupt_R_ENCODER_CNT = 0; // 右侧中断编码计数
+uint16_t Real_L_ENCODER_CNT = 0;      // 左侧定时计数
+uint16_t Real_R_ENCODER_CNT = 0;      // 右侧定时计数
+uint16_t ENCODER_Speed = 0;           // 编码电机速度(cm/s)
 
 void ENCODER_InitPro(void) {}
 
 /**
- * @brief 编码电机测速
+ * @brief 定时采集编码计数
  *
  * @param 无
  *
@@ -17,23 +20,19 @@ void ENCODER_InitPro(void) {}
  */
 void ENCODER_Collection_CodeData(void)
 {
-    float encoder = 0;
-    float speed = 0;
+    // 实际编码计数值
+    Real_L_ENCODER_CNT = Interrupt_L_ENCODER_CNT;
+    Real_R_ENCODER_CNT = Interrupt_R_ENCODER_CNT;
 
-    // 取两路编码平均值
-    encoder = (L_ENCODER_CNT + R_ENCODER_CNT) / 2;
-
-    // 速度：XXcm/100ms
-    speed = (encoder / ENCODER_Cycle) * ENCODER_Perimeter;
-
-    // 预测速度：XXcm/1s
-    ENCODER_Speed = (uint8_t)(speed * 10);
+    // 速度预测
+    float average_encoder = (Real_L_ENCODER_CNT + Real_R_ENCODER_CNT) / 2.0;
+    ENCODER_Speed = ((average_encoder / ENCODER_Cycle) * ENCODER_Perimeter) * 100.0;
 
     // 清空编码计数值
-    L_ENCODER_CNT = 0;
-    R_ENCODER_CNT = 0;
+    Interrupt_L_ENCODER_CNT = 0;
+    Interrupt_R_ENCODER_CNT = 0;
 
-    vTaskDelay(100);
+    vTaskDelay(10);
 }
 
 void EXTI9_5_IRQHandler(void)
@@ -43,7 +42,7 @@ void EXTI9_5_IRQHandler(void)
     {
         if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_6) == 0)
         {
-            L_ENCODER_CNT++;
+            Interrupt_L_ENCODER_CNT++;
             GPIO_LED_TipsLED(1);
         }
         EXTI_ClearITPendingBit(EXTI_Line6);
@@ -54,7 +53,7 @@ void EXTI9_5_IRQHandler(void)
     {
         if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_7) == 0)
         {
-            L_ENCODER_CNT++;
+            Interrupt_L_ENCODER_CNT++;
             GPIO_LED_TipsLED(1);
         }
         EXTI_ClearITPendingBit(EXTI_Line7);
@@ -65,7 +64,7 @@ void EXTI9_5_IRQHandler(void)
     {
         if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_8) == 0)
         {
-            R_ENCODER_CNT++;
+            Interrupt_R_ENCODER_CNT++;
             GPIO_LED_TipsLED(1);
         }
         EXTI_ClearITPendingBit(EXTI_Line8);
@@ -76,7 +75,7 @@ void EXTI9_5_IRQHandler(void)
     {
         if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9) == 0)
         {
-            R_ENCODER_CNT++;
+            Interrupt_R_ENCODER_CNT++;
             GPIO_LED_TipsLED(1);
         }
         EXTI_ClearITPendingBit(EXTI_Line9);

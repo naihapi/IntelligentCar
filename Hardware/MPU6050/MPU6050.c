@@ -393,7 +393,7 @@ void MPU6050_FallDown_Handler(void)
 {
 	if (MPU6050_Pitch > 70 || MPU6050_Pitch < -70)
 	{
-		PID_State = 0;
+		// PID_State = 0;
 	}
 }
 
@@ -419,5 +419,25 @@ void MPU6050_InitPro(void)
 	{
 		Debug_InitResult = MPU6050_DMP_Init();
 		Delay_ms(300);
+	}
+}
+
+/**
+ * @brief 外部中断线1中断服务程序
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note MPU6050中断获取数据
+ */
+void EXTI1_IRQHandler(void)
+{
+	if (EXTI_GetITStatus(EXTI_Line1) == SET)
+	{
+		if (!MPU6050_DMP_Get_Data(&MPU6050_Pitch, &MPU6050_Roll, &MPU6050_Yaw))
+		{
+		}
+		EXTI_ClearITPendingBit(EXTI_Line1);
 	}
 }

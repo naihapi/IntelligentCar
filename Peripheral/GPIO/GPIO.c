@@ -467,7 +467,7 @@ void GPIO_InitPro(void)
     GPIO_IIC_Init();
     GPIO_ADC_Init();
     GPIO_ENCODER_Init();
-    GPIO_MPU6050_Init();
+    // GPIO_MPU6050_Init();
 
     GPIO_MOTOR_Init();
     GPIO_USART_Init();

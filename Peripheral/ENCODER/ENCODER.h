@@ -18,10 +18,15 @@
 #define ENCODER_Cycle (float)1400.0   // N20电机一圈计数值
 
 // 变量
-//...
+extern uint16_t ENCODER_Speed;
+extern uint16_t Interrupt_L_ENCODER_CNT;
+extern uint16_t Interrupt_R_ENCODER_CNT;
+extern uint16_t Real_L_ENCODER_CNT;
+extern uint16_t Real_R_ENCODER_CNT;
 
 // API
 void ENCODER_InitPro(void);
 void ENCODER_Collection_CodeData(void);
+int PID_RetExecutionQuantity_SpeedControl(float TargetValue);
 
 #endif

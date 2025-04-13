@@ -13,6 +13,7 @@
 
 // API
 void MOTOR_InitPro(void);
+int MOTOR_Limit(int NowValue, int TargetValue);
 void MOTOR_Left_Positive(void);
 void MOTOR_Left_Negative(void);
 void MOTOR_Right_Positive(void);

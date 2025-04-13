@@ -26,6 +26,7 @@ void TASK1(void *pvParameters)
 {
     while (1)
     {
+        vTaskDelay(1);
     }
 }
 
@@ -52,11 +53,12 @@ void TASK3(void *pvParameters)
 {
     while (1)
     {
-        SwitchModule_t *current;
+        // SwitchModule_t *current;
 
-        current = Data_DataBase_GetItem(Head_DataBase, "Buzzer");
-        USART2_SendNumber(current->state);
-        vTaskDelay(1000);
+        // current = Data_DataBase_GetItem(Head_DataBase, "Buzzer");
+        // USART2_SendNumber(current->state);
+        // vTaskDelay(1000);
+        vTaskDelay(1);
     }
 }
 
@@ -70,6 +72,7 @@ void TASK4(void *pvParameters)
     while (1)
     {
         // MPU6050_FallDown_Handler();
+        vTaskDelay(1);
     }
 }
 
@@ -82,6 +85,7 @@ void TASK5(void *pvParameters)
 {
     while (1)
     {
+        vTaskDelay(1);
     }
 }
 
@@ -94,6 +98,7 @@ void TASK6(void *pvParameters)
 {
     while (1)
     {
+        vTaskDelay(1);
     }
 }
 
@@ -106,6 +111,7 @@ void TASK7(void *pvParameters)
 {
     while (1)
     {
+        vTaskDelay(1);
     }
 }
 
@@ -116,8 +122,11 @@ void TASK7(void *pvParameters)
  */
 void TASK8(void *pvParameters)
 {
+    int value = 0;
     while (1)
     {
+        value = PID_RetExecutionQuantity_SpeedControl(20);
+        MOTOR_Pulse_Config(value, value);
     }
 }
 
@@ -143,6 +152,13 @@ void TASK10(void *pvParameters)
 {
     while (1)
     {
+        USART2_SendNumber(Real_L_ENCODER_CNT);
+        USART2_SendString("\r\n");
+        USART2_SendNumber(Real_R_ENCODER_CNT);
+        USART2_SendString("\r\n");
+        USART2_SendNumber(ENCODER_Speed);
+        USART2_SendString("\r\n");
+        vTaskDelay(500);
     }
 }
 
@@ -168,6 +184,7 @@ void TASK12(void *pvParameters)
 {
     while (1)
     {
+        vTaskDelay(1);
     }
 }
 
@@ -180,6 +197,7 @@ void TASK13(void *pvParameters)
 {
     while (1)
     {
+        vTaskDelay(1);
     }
 }
 
@@ -192,6 +210,7 @@ void TASK14(void *pvParameters)
 {
     while (1)
     {
+        vTaskDelay(1);
     }
 }
 
@@ -204,6 +223,7 @@ void TASK15(void *pvParameters)
 {
     while (1)
     {
+        vTaskDelay(1);
     }
 }
 
