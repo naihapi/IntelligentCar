@@ -10,7 +10,7 @@ float PID_Speed_Error_Last = 0;
 float PID_Speed_Error_Difference = 0;
 
 /*转向环-对管控制*/
-float PID_vITR_P = 600, PID_vITR_I = 5, PID_vITR_D = 100;
+float PID_vITR_P = 300, PID_vITR_I = 5, PID_vITR_D = 100;
 float PID_vITR_Error = 0;
 float PID_vITR_Error_Sum = 0;
 float PID_vITR_Error_Last = 0;

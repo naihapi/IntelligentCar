@@ -41,5 +41,8 @@ int8_t MPU6050_DMP_Get_Data(float *pitch, float *roll, float *yaw);
 void MPU6050_Remove_YawDeviaction(void);
 float MPU6050_AngleConvert(float Angle);
 int16_t MPU6050_OppositeAngle(int16_t angle);
+uint8_t MPU6050_ThresholdCompare(int16_t mpu_yaw, int16_t compare_value, int16_t vlaue);
+void MPU6050_YawAngleLog_Record(void);
+int16_t MPU6050_YawAngleLog_Get(void);
 
 #endif

@@ -85,6 +85,7 @@ void ADC_ITR9909_Init(void)
 void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
 {
     uint16_t average = 0;
+    ADC_Threshold_Flag = 2;
 
     average = (ADC_ITR9909_Value[ADC_ITRBuffer_LeftValue] +
                ADC_ITR9909_Value[ADC_ITRBuffer_MiddleValue] +
@@ -110,12 +111,13 @@ void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
     {
         ADC_Threshold_Flag = 1;
         Delay_TimeLog_Record();
+        // MPU6050_YawAngleLog_Record();
 
         Debug_Flag1 = 1;
     }
 
-    average = (ADC_ITR9909_Value[ADC_ITRBuffer_MiddleValue] +
-               ADC_ITR9909_Value[ADC_ITRBuffer_RightValue]) /
+    average = (ADC_ITR9909_Value[ADC_ITRBuffer_RightValue] +
+               ADC_ITR9909_Value[ADC_ITRBuffer_MiddleValue]) /
               2.0;
     if (average < mini)
     {
@@ -125,11 +127,10 @@ void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
     {
         ADC_Threshold_Flag = 1;
         Delay_TimeLog_Record();
+        // MPU6050_YawAngleLog_Record();
 
         Debug_Flag1 = 1;
     }
-
-    ADC_Threshold_Flag = 2;
 }
 uint8_t Debug_Flag1 = 0; // 蜂鸣器
 

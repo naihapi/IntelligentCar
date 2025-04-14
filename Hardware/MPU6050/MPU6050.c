@@ -7,6 +7,7 @@ float MPU6050_Roll = 0;					// 横滚角
 float MPU6050_Yaw = 0;					// 偏航角
 uint16_t MPU6050_YawDeviaction_CNT = 0; // 偏航角零漂误差
 int8_t Debug_InitResult = 100;
+int16_t MPU6050_AngleRecord = 0;
 
 /*
  * 来自DMP库官方例程
@@ -368,7 +369,7 @@ void MPU6050_Remove_YawDeviaction(void)
  *
  * @retval 无
  *
- * @note 转换为0~360°
+ * @note -180°~180°转换为0~360°
  */
 float MPU6050_AngleConvert(float Angle)
 {
@@ -378,23 +379,6 @@ float MPU6050_AngleConvert(float Angle)
 	}
 
 	return Angle;
-}
-
-/**
- * @brief 车体倒地处理
- *
- * @param 无
- *
- * @retval 无
- *
- * @note 无
- */
-void MPU6050_FallDown_Handler(void)
-{
-	if (MPU6050_Pitch > 70 || MPU6050_Pitch < -70)
-	{
-		// PID_State = 0;
-	}
 }
 
 /**
@@ -409,9 +393,59 @@ void MPU6050_FallDown_Handler(void)
 int16_t MPU6050_OppositeAngle(int16_t angle)
 {
 	angle += 180;
-	angle -= 360;
+	if (angle > 180)
+		angle -= 360;
 
 	return angle;
+}
+
+/**
+ * @brief 阈值比较
+ *
+ * @param compare_value 比较角度
+ * @param vlaue ±区间角度
+ *
+ * @retval 1 区间之内
+ * @retval 0 区间之外
+ *
+ * @note 若区间=10，比较值=30°，则比较范围=30°±10
+ * @note 若当前偏航角在区间内返回1，否则返回0
+ */
+uint8_t MPU6050_ThresholdCompare(int16_t mpu_yaw, int16_t compare_value, int16_t vlaue)
+{
+	int16_t max = 0;
+	int16_t mini = 0;
+
+	// 获取偏航角数值
+	mpu_yaw = (int16_t)MPU6050_Yaw;
+
+	// ±区间
+	max = compare_value + vlaue;
+	mini = compare_value - vlaue;
+
+	// 转换为360°
+	mpu_yaw = MPU6050_AngleConvert(mpu_yaw);
+	max = MPU6050_AngleConvert(max);
+	mini = MPU6050_AngleConvert(mini);
+
+	if (mpu_yaw >= mini && mpu_yaw <= max)
+	{
+		// 在区间之内
+		return 1;
+	}
+
+	// 在区间之外
+	return 0;
+}
+
+void MPU6050_YawAngleLog_Record(void)
+{
+	MPU6050_AngleRecord = MPU6050_Yaw;
+}
+
+int16_t MPU6050_YawAngleLog_Get(void)
+{
+	return MPU6050_AngleRecord;
 }
 
 /**

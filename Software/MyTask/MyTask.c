@@ -20,7 +20,7 @@ TaskHandle_t TASK_START_Handler;
 /**
  * @brief 任务1
  *
- * @note 超声波测距
+ * @note 无
  */
 void TASK1(void *pvParameters)
 {
@@ -33,7 +33,7 @@ void TASK1(void *pvParameters)
 /**
  * @brief 任务2
  *
- * @note 串口接收判断
+ * @note 无
  */
 void TASK2(void *pvParameters)
 {
@@ -47,17 +47,12 @@ void TASK2(void *pvParameters)
 /**
  * @brief 任务3
  *
- * @note 处理接收数据
+ * @note 无
  */
 void TASK3(void *pvParameters)
 {
     while (1)
     {
-        // SwitchModule_t *current;
-
-        // current = Data_DataBase_GetItem(Head_DataBase, "Buzzer");
-        // USART2_SendNumber(current->state);
-        // vTaskDelay(1000);
         vTaskDelay(1);
     }
 }
@@ -65,14 +60,12 @@ void TASK3(void *pvParameters)
 /**
  * @brief 任务4
  *
- * @note 倒地检测
+ * @note 无
  */
 void TASK4(void *pvParameters)
 {
     while (1)
     {
-        // MPU6050_FallDown_Handler();
-        vTaskDelay(1);
     }
 }
 
@@ -111,7 +104,7 @@ void TASK6(void *pvParameters)
 /**
  * @brief 任务7
  *
- * @note 无
+ * @note 阈值比较
  */
 void TASK7(void *pvParameters)
 {
@@ -120,6 +113,7 @@ void TASK7(void *pvParameters)
         ADC_ITR9909_ThresholdCompare(2000, 300);
     }
 }
+
 /**
  * @brief 任务8
  *
@@ -127,69 +121,19 @@ void TASK7(void *pvParameters)
  */
 void TASK8(void *pvParameters)
 {
-    int SpeedExecution = 0;                     // 速度执行量
-    int L_ItrExecution = 0, R_ItrExecution = 0; // 两侧对管执行量
-    int RealOut_Left = 0, RealOut_Right = 0;    // 最终电机输出数值
-
+    int SpeedEXE = 0;
+    int LeftEXE = 0, RightEXE = 0;
     while (1)
     {
-        // 获取速度闭环执行量
-        SpeedExecution = PID_RetExecutionQuantity_SpeedControl(20);
+        Car_SpeedExecutionQuantity_ENCODER(&SpeedEXE, 20);
 
-        // 默认情况下，最终输出量=速度执行量
-        RealOut_Left = RealOut_Right = SpeedExecution;
-
-        if (ADC_ITR9909_Compare() == 2)
+        if (ADC_ITR9909_Compare() == ADC_ITR9909_OnLine)
         {
-            // 获取对管执行量
-            PID_RetExecutionQuantity_vITRControl(&L_ItrExecution, &R_ItrExecution);
-
-            // 右侧对管输出执行量
-            RealOut_Left -= R_ItrExecution;
-            RealOut_Right += R_ItrExecution;
-
-            // 左侧对管输出执行量
-            RealOut_Left += L_ItrExecution;
-            RealOut_Right -= L_ItrExecution;
-
-            // 限幅
-            if (RealOut_Left < 0)
-                RealOut_Left = 0;
-            if (RealOut_Right < 0)
-                RealOut_Right = 0;
-        }
-        else if (ADC_ITR9909_Compare() == 0)
-        {
-            vTaskDelay(100); // 消抖
-            if (ADC_ITR9909_Compare() == 0)
-            {
-                // 根据运行时间，回退到记录点
-                // MOTOR_Pulse_Config(-RealOut_Left, -RealOut_Right);
-                // vTaskDelay(Delay_TimeLog_Get());
-                while (1)
-                {
-                    MOTOR_Pulse_Config(-RealOut_Left, -RealOut_Right);
-                    if (ADC_ITR9909_Compare() == 1)
-                    {
-                        break;
-                    }
-                }
-
-                Car_SpinStop();
-                MOTOR_Pulse_Config(RealOut_Left, RealOut_Right);
-                vTaskDelay(300);
-                Car_SpinStop();
-                // while (1)
-                // {
-                // }
-
-                Car_BreakLine();
-                Car_SearchLine();
-            }
+            Car_TurnExecutionQuantity_ITR9909(&SpeedEXE, &LeftEXE, &RightEXE);
         }
 
         // 输出到电机
-        MOTOR_Pulse_Config(RealOut_Left, RealOut_Right);
+        MOTOR_Pulse_Config(LeftEXE, RightEXE);
     }
 }
 
@@ -209,19 +153,13 @@ void TASK9(void *pvParameters)
 /**
  * @brief 任务10
  *
- * @note 测速读取
+ * @note 无
  */
 void TASK10(void *pvParameters)
 {
     while (1)
     {
-        USART2_SendNumber(MPU6050_Pitch);
-        USART2_SendString("\r\n");
-        USART2_SendNumber(MPU6050_Roll);
-        USART2_SendString("\r\n");
-        USART2_SendNumber(MPU6050_Yaw);
-        USART2_SendString("\r\n");
-        vTaskDelay(500);
+        vTaskDelay(1);
     }
 }
 

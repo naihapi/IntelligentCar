@@ -15,6 +15,9 @@
 #define ADC_ITRBuffer_MiddleValue (uint8_t)1
 #define ADC_ITRBuffer_RightValue (uint8_t)2
 #define ADC_ITR9909_CompareValue (uint16_t)2000
+#define ADC_ITR9909_AwayLine (uint8_t)0
+#define ADC_ITR9909_CloseLine (uint8_t)1
+#define ADC_ITR9909_OnLine (uint8_t)2
 
 // 变量
 extern uint16_t ADC_ITR9909_Value[3];

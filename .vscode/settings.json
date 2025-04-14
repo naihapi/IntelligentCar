@@ -15,6 +15,7 @@
         "utility": "c",
         "delay.h": "c",
         "gpio.h": "c",
-        "mpu6050_reg.h": "c"
+        "mpu6050_reg.h": "c",
+        "pid.h": "c"
     }
 }

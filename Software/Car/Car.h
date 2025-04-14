@@ -24,8 +24,10 @@
 
 // API
 void Manual_InitPro(void);
-void Car_SpinStop(void);
-void Car_SearchLine(void);
-void Car_BreakLine(void);
-
+void Car_Stop(void);
+void Car_SearchLine_Spin(void);
+void Car_BreakLine_Spin(void);
+void Car_SearchLine_Spin_Range(int16_t angle);
+void Car_SpeedExecutionQuantity_ENCODER(int *Speed, uint8_t TargetSpeed);
+void Car_TurnExecutionQuantity_ITR9909(int *Speed, int *Left, int *Right);
 #endif
