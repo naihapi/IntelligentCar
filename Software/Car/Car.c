@@ -1,5 +1,8 @@
 #include "Car.h"
 
+volatile uint8_t Car_Spin_Flag = 0;      // 车辆旋转标志位(车辆调用旋转函数时，标志位置1；调用停止函数时，标志位置0)
+volatile uint8_t Car_ErrorLine_FLAG = 0; // 车辆错误线处理标志位(车辆进入错路处理时，标志位置1；退出错误路处理时，标志位置0)
+
 /**
  * @brief 车体初始化
  *
@@ -11,6 +14,40 @@
  */
 void Car_InitPro(void)
 {
+}
+
+void Car_SetFlag(uint8_t flag, uint8_t state)
+{
+    switch (flag)
+    {
+    case CAR_FLAG_SPIN:
+    {
+        Car_Spin_Flag = state;
+    }
+    break;
+    case CAR_FLAG_ERRLINE:
+    {
+        Car_ErrorLine_FLAG = state;
+    }
+    break;
+    }
+}
+
+uint8_t Car_GetFlag(uint8_t flag)
+{
+    switch (flag)
+    {
+    case CAR_FLAG_SPIN:
+    {
+        return Car_Spin_Flag;
+    }
+    case CAR_FLAG_ERRLINE:
+    {
+        return Car_ErrorLine_FLAG;
+    }
+    }
+
+    return 9;
 }
 
 /**
@@ -25,11 +62,17 @@ void Car_InitPro(void)
 void Car_Spin360(void)
 {
     MOTOR_Pulse_Config(7200, -7200);
+    Car_SetFlag(CAR_FLAG_SPIN, 1);
 }
 
 void Car_StraightFront(void)
 {
     MOTOR_Pulse_Config(7200, 7200);
+}
+
+void Car_StraightBack(void)
+{
+    MOTOR_Pulse_Config(-7200, -7200);
 }
 
 /**
@@ -44,6 +87,7 @@ void Car_StraightFront(void)
 void Car_Stop(void)
 {
     MOTOR_Pulse_Config(0, 0);
+    Car_SetFlag(CAR_FLAG_SPIN, 0);
 }
 
 /**
@@ -63,7 +107,6 @@ void Car_SearchLine_Spin(void)
     {
         if (ADC_ITR9909_Value[0] > 1400 || ADC_ITR9909_Value[1] > 1400 || ADC_ITR9909_Value[2] > 1400)
         {
-            Debug_Flag1 = 1;
             Car_Stop();
 
             break;
@@ -84,15 +127,13 @@ void Car_SearchLine_Spin(void)
 void Car_SearchLine_Spin_Range(int16_t angle)
 {
     Car_Spin360();
-    USART2_SendNumber(MPU6050_YawAngleLog_Get());
 
     while (1)
     {
         if (ADC_ITR9909_Value[0] > 1400 || ADC_ITR9909_Value[1] > 1400 || ADC_ITR9909_Value[2] > 1400)
         {
-            if (MPU6050_ThresholdCompare(MPU6050_Yaw, angle, 50) == 0)
+            if (MPU6050_ThresholdCompare(MPU6050_Yaw, angle, 30) == 0)
             {
-                Debug_Flag1 = 1;
                 Car_Stop();
 
                 break;
@@ -118,7 +159,6 @@ void Car_BreakLine_Spin(void)
     {
         if (ADC_ITR9909_Value[0] < 300 && ADC_ITR9909_Value[1] < 300 & ADC_ITR9909_Value[2] < 300)
         {
-            Debug_Flag1 = 1;
             Car_Stop();
 
             break;
@@ -184,4 +224,8 @@ void Car_TurnExecutionQuantity_ITR9909(int *Speed, int *Left, int *Right)
 
     *Left = RealOut_Left;
     *Right = RealOut_Right;
+}
+
+void Car_ErrorLine_Handler1(void)
+{
 }

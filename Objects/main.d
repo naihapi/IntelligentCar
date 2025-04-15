@@ -58,10 +58,12 @@
 .\objects\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\main.o: .\Software\PID\PID.h
 .\objects\main.o: .\Peripheral\ADC\ADC.h
+.\objects\main.o: .\Software\Car\Car.h
+.\objects\main.o: .\Peripheral\ADC\ADC.h
+.\objects\main.o: .\Software\PID\PID.h
 .\objects\main.o: .\Hardware\MPU6050\MPU6050.h
 .\objects\main.o: .\Hardware\MPU6050\MPU6050_Reg.h
 .\objects\main.o: .\Software\Data\Data.h
 .\objects\main.o: .\Software\MyTask\MyTask.h
 .\objects\main.o: .\Software\MyTask\MyTask.h
-.\objects\main.o: .\Software\Car\Car.h
 .\objects\main.o: .\Software\Receive\Receive.h

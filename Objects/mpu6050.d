@@ -54,7 +54,10 @@
 .\objects\mpu6050.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\mpu6050.o: .\Software\PID\PID.h
 .\objects\mpu6050.o: .\Peripheral\ADC\ADC.h
+.\objects\mpu6050.o: .\Software\Car\Car.h
 .\objects\mpu6050.o: .\Hardware\MOTOR\MOTOR.h
 .\objects\mpu6050.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\mpu6050.o: .\Peripheral\ADC\ADC.h
+.\objects\mpu6050.o: .\Software\PID\PID.h
 .\objects\mpu6050.o: .\Hardware\MPU6050\MPU6050.h
 .\objects\mpu6050.o: Hardware\MPU6050\MPU6050_Reg.h

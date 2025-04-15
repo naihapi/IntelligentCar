@@ -384,11 +384,11 @@ float MPU6050_AngleConvert(float Angle)
 /**
  * @brief 计算对角度
  *
- * @param 无
+ * @param angle 原角度
  *
- * @retval 无
+ * @retval 返回对角度
  *
- * @note 依据MPU6050角度-180°~180°
+ * @note 获取对角度，例如0°的对角度是180°
  */
 int16_t MPU6050_OppositeAngle(int16_t angle)
 {
@@ -402,6 +402,7 @@ int16_t MPU6050_OppositeAngle(int16_t angle)
 /**
  * @brief 阈值比较
  *
+ * @param mpu_yaw 当前角度
  * @param compare_value 比较角度
  * @param vlaue ±区间角度
  *
@@ -410,14 +411,20 @@ int16_t MPU6050_OppositeAngle(int16_t angle)
  *
  * @note 若区间=10，比较值=30°，则比较范围=30°±10
  * @note 若当前偏航角在区间内返回1，否则返回0
+ * @note
+ * @note 等价于：mini <= mpu_yaw && mpu_yaw <= 360 || 0 <= mpu_yaw && mpu_yaw <= max
  */
+// 5 -10 ±20
+// max:10 mini:330
+// 190 170
+// 350
 uint8_t MPU6050_ThresholdCompare(int16_t mpu_yaw, int16_t compare_value, int16_t vlaue)
 {
 	int16_t max = 0;
 	int16_t mini = 0;
 
-	// 获取偏航角数值
-	mpu_yaw = (int16_t)MPU6050_Yaw;
+	// // 获取偏航角数值
+	// mpu_yaw = (int16_t)MPU6050_Yaw;
 
 	// ±区间
 	max = compare_value + vlaue;
@@ -428,10 +435,17 @@ uint8_t MPU6050_ThresholdCompare(int16_t mpu_yaw, int16_t compare_value, int16_t
 	max = MPU6050_AngleConvert(max);
 	mini = MPU6050_AngleConvert(mini);
 
-	if (mpu_yaw >= mini && mpu_yaw <= max)
+	// 常规非跨界区域
+	if (max >= mini)
 	{
-		// 在区间之内
-		return 1;
+		return (mini <= mpu_yaw && mpu_yaw <= max) ? 1 : 0;
+	}
+
+	// 处理360°跨界区域，跨界时，max和mini数值倒转
+	// 数轴两端合并一个圆，360°往后为0°，即350°~5°~10°
+	if (max < mini)
+	{
+		return (mini <= mpu_yaw || mpu_yaw <= max) ? 1 : 0;
 	}
 
 	// 在区间之外

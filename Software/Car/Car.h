@@ -12,6 +12,10 @@
 // 变量
 //...
 
+// 宏定义
+#define CAR_FLAG_SPIN 1    // 车辆旋转标志位
+#define CAR_FLAG_ERRLINE 2 // 车辆错线标志位
+
 // 外置硬件
 //...
 
@@ -30,4 +34,10 @@ void Car_BreakLine_Spin(void);
 void Car_SearchLine_Spin_Range(int16_t angle);
 void Car_SpeedExecutionQuantity_ENCODER(int *Speed, uint8_t TargetSpeed);
 void Car_TurnExecutionQuantity_ITR9909(int *Speed, int *Left, int *Right);
+void Car_StraightBack(void);
+void Car_StraightFront(void);
+void Car_SetFlag(uint8_t flag, uint8_t state);
+uint8_t Car_GetFlag(uint8_t flag);
+void Car_ErrorLine_Collection(void);
+
 #endif

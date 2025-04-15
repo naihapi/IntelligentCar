@@ -93,6 +93,10 @@ void TASK6(void *pvParameters)
     {
         if (Debug_Flag1 == 1)
         {
+            USART2_SendString("Yaw Record:");
+            USART2_SendNumber(MPU6050_YawAngleLog_Get());
+            USART2_SendString("\r\n");
+
             GPIO_Buzzer_Config(1);
             vTaskDelay(200);
             GPIO_Buzzer_Config(0);
@@ -110,14 +114,14 @@ void TASK7(void *pvParameters)
 {
     while (1)
     {
-        ADC_ITR9909_ThresholdCompare(2000, 300);
+        ADC_ITR9909_ThresholdCompare(ADC_ITR9909_CompareValue_MAX, ADC_ITR9909_CompareValue_MINI);
     }
 }
 
 /**
  * @brief 任务8
  *
- * @note 无
+ * @note 十字错路口、直角路口巡线
  */
 void TASK8(void *pvParameters)
 {
@@ -127,7 +131,7 @@ void TASK8(void *pvParameters)
     {
         Car_SpeedExecutionQuantity_ENCODER(&SpeedEXE, 20);
 
-        if (ADC_ITR9909_Compare() == ADC_ITR9909_OnLine)
+        if (ADC_GetFlag(ADC_FLAG_ITR9909_THRESHOLD) == ADC_FLAGSTATE_ITR9909_NORMAL)
         {
             Car_TurnExecutionQuantity_ITR9909(&SpeedEXE, &LeftEXE, &RightEXE);
         }
@@ -157,9 +161,59 @@ void TASK9(void *pvParameters)
  */
 void TASK10(void *pvParameters)
 {
+    int SpeedEXE = 0;
+    int LeftEXE = 0, RightEXE = 0;
     while (1)
     {
-        vTaskDelay(1);
+        if (ADC_GetFlag(ADC_FLAG_ITR9909_THRESHOLD) == ADC_FLAGSTATE_ITR9909_TINY)
+        {
+            vTaskDelay(200); // 消抖
+            if (ADC_GetFlag(ADC_FLAG_ITR9909_THRESHOLD) == ADC_FLAGSTATE_ITR9909_TINY)
+            {
+                USART2_SendString("RouteError:");
+                USART2_SendNumber(MPU6050_YawAngleLog_Get());
+                USART2_SendString("\r\n");
+
+                USART2_SendString("RouteError-DelRange:");
+                USART2_SendNumber(MPU6050_OppositeAngle(MPU6050_YawAngleLog_Get()));
+                USART2_SendString("\r\n");
+
+                Car_SetFlag(CAR_FLAG_ERRLINE, 1); // 错线置位
+                vTaskSuspend(TASK8_Handler);      // 挂起普通循迹任务
+
+                Car_StraightBack(); // 车辆后退
+                vTaskDelay(100);    // 延时
+
+                Car_SearchLine_Spin(); // 旋转巡线
+
+                while (1)
+                {
+                    // 巡线回退到十字路口
+                    Car_SpeedExecutionQuantity_ENCODER(&SpeedEXE, 20);
+                    Car_TurnExecutionQuantity_ITR9909(&SpeedEXE, &LeftEXE, &RightEXE);
+                    MOTOR_Pulse_Config(LeftEXE, RightEXE);
+
+                    if (ADC_GetFlag(ADC_FLAG_ITR9909_THRESHOLD) == ADC_FLAGSTATE_ITR9909_OVERFLOW)
+                    {
+                        Car_StraightFront();
+                        vTaskDelay(150);
+                        Car_Stop();
+
+                        break;
+                    }
+                }
+
+                Car_SearchLine_Spin_Range(MPU6050_OppositeAngle(MPU6050_YawAngleLog_Get()));
+
+                Car_Stop();
+                while (1)
+                {
+                }
+
+                Car_SetFlag(CAR_FLAG_ERRLINE, 0);
+                vTaskResume(TASK8_Handler);
+            }
+        }
     }
 }
 
@@ -185,7 +239,7 @@ void TASK12(void *pvParameters)
 {
     while (1)
     {
-        vTaskDelay(1);
+        // Car_ErrorLine_Collection();
     }
 }
 

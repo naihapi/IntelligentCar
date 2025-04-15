@@ -47,6 +47,7 @@
 .\objects\car.o: .\Peripheral\TIM\TIM.h
 .\objects\car.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\car.o: .\Peripheral\ADC\ADC.h
+.\objects\car.o: .\Software\Car\Car.h
 .\objects\car.o: .\Software\PID\PID.h
 .\objects\car.o: .\Hardware\MPU6050\MPU6050.h
 .\objects\car.o: D:\Keil5\ARM\ARMCC\Bin\..\include\math.h

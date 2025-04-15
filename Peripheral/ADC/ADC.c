@@ -2,6 +2,7 @@
 
 uint16_t ADC_ITR9909_Value[3];  // 对管数值(ADC_ITRBuffer_xxxValue)
 uint8_t ADC_Threshold_Flag = 2; // 对管阈值(0：小于最低阈值，1：大于最高阈值，2：没有超过阈值)
+// uint8_t ADC_Threshold_Dir = 1;  // 对管方向(当)
 
 /**
  * @brief 模转数初始化
@@ -69,6 +70,31 @@ void ADC_ITR9909_Init(void)
     ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
 
+void ADC_SetFlag(uint8_t flag, uint8_t state)
+{
+    switch (flag)
+    {
+    case ADC_FLAG_ITR9909_THRESHOLD:
+    {
+        ADC_Threshold_Flag = state;
+    }
+    break;
+    }
+}
+
+uint8_t ADC_GetFlag(uint8_t flag)
+{
+    switch (flag)
+    {
+    case ADC_FLAG_ITR9909_THRESHOLD:
+    {
+        return ADC_Threshold_Flag;
+    }
+    }
+
+    return 9;
+}
+
 /**
  * @brief 阈值比较
  *
@@ -85,7 +111,7 @@ void ADC_ITR9909_Init(void)
 void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
 {
     uint16_t average = 0;
-    ADC_Threshold_Flag = 2;
+    ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_NORMAL);
 
     average = (ADC_ITR9909_Value[ADC_ITRBuffer_LeftValue] +
                ADC_ITR9909_Value[ADC_ITRBuffer_MiddleValue] +
@@ -93,11 +119,11 @@ void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
               3.0;
     if (average < mini)
     {
-        ADC_Threshold_Flag = 0;
+        ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_TINY);
     }
     else if (average > max)
     {
-        ADC_Threshold_Flag = 1;
+        ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_OVERFLOW);
     }
 
     average = (ADC_ITR9909_Value[ADC_ITRBuffer_LeftValue] +
@@ -105,15 +131,18 @@ void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
               2.0;
     if (average < mini)
     {
-        ADC_Threshold_Flag = 0;
+        ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_TINY);
     }
     else if (average > max)
     {
-        ADC_Threshold_Flag = 1;
+        ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_OVERFLOW);
         Delay_TimeLog_Record();
-        // MPU6050_YawAngleLog_Record();
 
-        Debug_Flag1 = 1;
+        if (Car_GetFlag(CAR_FLAG_SPIN) == 0 && Car_GetFlag(CAR_FLAG_ERRLINE) == 0)
+        {
+            MPU6050_YawAngleLog_Record();
+            Debug_Flag1 = 1;
+        }
     }
 
     average = (ADC_ITR9909_Value[ADC_ITRBuffer_RightValue] +
@@ -121,15 +150,18 @@ void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
               2.0;
     if (average < mini)
     {
-        ADC_Threshold_Flag = 0;
+        ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_TINY);
     }
     else if (average > max)
     {
-        ADC_Threshold_Flag = 1;
+        ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_OVERFLOW);
         Delay_TimeLog_Record();
-        // MPU6050_YawAngleLog_Record();
 
-        Debug_Flag1 = 1;
+        if (Car_GetFlag(CAR_FLAG_SPIN) == 0 && Car_GetFlag(CAR_FLAG_ERRLINE) == 0)
+        {
+            MPU6050_YawAngleLog_Record();
+            Debug_Flag1 = 1;
+        }
     }
 }
 uint8_t Debug_Flag1 = 0; // 蜂鸣器
@@ -145,10 +177,10 @@ uint8_t Debug_Flag1 = 0; // 蜂鸣器
  * @note 2个或3个对管平均值>最高阈值，输出1
  * @note 2个或3个对管平均值不超过阈值，输出2
  */
-uint8_t ADC_ITR9909_Compare(void)
-{
-    return ADC_Threshold_Flag;
-}
+// uint8_t ADC_ITR9909_Compare(void)
+// {
+//     return ADC_Threshold_Flag;
+// }
 
 void ADC_InitPro(void)
 {

@@ -153,27 +153,17 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>L_ENCODER_CNT,0x0A</ItemText>
+          <ItemText>ADC_ITR9909_Value,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>R_ENCODER_CNT,0x0A</ItemText>
+          <ItemText>MPU6050_Yaw</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>ADC_ITR9909_Value,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>3</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>MPU6050_Yaw</ItemText>
-        </Ww>
-        <Ww>
-          <count>4</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>angle,0x0A</ItemText>
+          <ItemText>Debug_InitResult</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
