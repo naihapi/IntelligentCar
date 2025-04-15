@@ -93,9 +93,23 @@ void TASK6(void *pvParameters)
     {
         if (Debug_Flag1 == 1)
         {
-            // USART2_SendString("Yaw Record:");
-            // USART2_SendNumber(MPU6050_YawAngleLog_Get());
-            // USART2_SendString("\r\n");
+            USART2_SendString("ADC-Left:");
+            USART2_SendNumber(ADC_ITR9909_Value[0]);
+            USART2_SendString("\r\n");
+
+            USART2_SendString("ADC-Mid:");
+            USART2_SendNumber(ADC_ITR9909_Value[1]);
+            USART2_SendString("\r\n");
+
+            USART2_SendString("ADC-Right:");
+            USART2_SendNumber(ADC_ITR9909_Value[2]);
+            USART2_SendString("\r\n");
+
+            USART2_SendString("ADC-Dir:");
+            USART2_SendNumber(ADC_GetFlag(ADC_FLAG_DIRECTION));
+            USART2_SendString("\r\n");
+
+            ADC_TIR9909Log_Record();
 
             GPIO_Buzzer_Config(1);
             vTaskDelay(200);
@@ -161,7 +175,6 @@ void TASK9(void *pvParameters)
  */
 void TASK10(void *pvParameters)
 {
-
     while (1)
     {
         if (ADC_GetFlag(ADC_FLAG_ITR9909_THRESHOLD) == ADC_FLAGSTATE_ITR9909_TINY)
@@ -172,7 +185,20 @@ void TASK10(void *pvParameters)
                 Car_SetFlag(CAR_FLAG_ERRLINE, 1); // 错线置位
                 vTaskSuspend(TASK8_Handler);      // 挂起普通循迹任务
 
-                Car_ErrorLine_Handler1();
+                // 直角/锐角判断方法
+                // 如果两个及以上的对管数值高于阈值，会记录一次时间；冲出赛道后的时间与上一次记录时间的差值小于1s，则判断为直角或锐角线路
+                if (Delay_Getxms(NULL) - Delay_TimeLog_Get() < 1000)
+                {
+                    Car_StraightBack();
+                    vTaskDelay(100);
+                    Car_Stop();
+
+                    Car_ErrorLine_Handler2();
+                }
+                else
+                {
+                    Car_ErrorLine_Handler1();
+                }
 
                 Car_SetFlag(CAR_FLAG_ERRLINE, 0);
                 vTaskResume(TASK8_Handler);

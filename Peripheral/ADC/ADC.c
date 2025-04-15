@@ -1,8 +1,9 @@
 #include "ADC.h"
 
-uint16_t ADC_ITR9909_Value[3];  // 对管数值(ADC_ITRBuffer_xxxValue)
-uint8_t ADC_Threshold_Flag = 2; // 对管阈值(ADC_FLAGSTATE_ITR9909_xxx)
-uint8_t ADC_Threshold_Dir = 2;  // 对管方向(ADC_FLAGSTATE_DIRECTION_xxx)
+uint16_t ADC_ITR9909_Value[3];       // 对管数值(ADC_ITRBuffer_xxxValue)
+uint8_t ADC_Threshold_Flag = 2;      // 对管阈值(ADC_FLAGSTATE_ITR9909_xxx)
+uint8_t ADC_Threshold_Dir = 2;       // 对管方向(ADC_FLAGSTATE_DIRECTION_xxx)
+uint16_t ADC_ITR9909_RecordValue[3]; // 对管数值记录
 
 /**
  * @brief 模转数初始化
@@ -136,6 +137,9 @@ void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
         // 标志位记录
         ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_OVERFLOW);
         ADC_SetFlag(ADC_FLAG_DIRECTION, ADC_FLAGSTATE_DIRECTION_BOTH);
+
+        // 时间记录
+        Delay_TimeLog_Record();
     }
 
     average = (ADC_ITR9909_Value[ADC_ITRBuffer_LeftValue] +
@@ -190,21 +194,33 @@ void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
 }
 uint8_t Debug_Flag1 = 0; // 蜂鸣器
 
-/**
- * @brief 获取比较值
- *
- * @param 无
- *
- * @retval 返回0或1或2
- *
- * @note 2个或3个对管平均值<最低阈值，输出0
- * @note 2个或3个对管平均值>最高阈值，输出1
- * @note 2个或3个对管平均值不超过阈值，输出2
- */
-// uint8_t ADC_ITR9909_Compare(void)
-// {
-//     return ADC_Threshold_Flag;
-// }
+void ADC_TIR9909Log_Record(void)
+{
+    ADC_ITR9909_RecordValue[ADC_ITRBuffer_LeftValue] = ADC_ITR9909_Value[ADC_ITRBuffer_LeftValue];
+    ADC_ITR9909_RecordValue[ADC_ITRBuffer_MiddleValue] = ADC_ITR9909_Value[ADC_ITRBuffer_MiddleValue];
+    ADC_ITR9909_RecordValue[ADC_ITRBuffer_RightValue] = ADC_ITR9909_Value[ADC_ITRBuffer_RightValue];
+}
+
+uint16_t ADC_TIR9909Log_Get(uint8_t select)
+{
+    switch (select)
+    {
+    case ADC_ITRBuffer_LeftValue:
+    {
+        return ADC_ITR9909_RecordValue[ADC_ITRBuffer_LeftValue];
+    }
+    case ADC_ITRBuffer_MiddleValue:
+    {
+        return ADC_ITR9909_RecordValue[ADC_ITRBuffer_MiddleValue];
+    }
+    case ADC_ITRBuffer_RightValue:
+    {
+        return ADC_ITR9909_RecordValue[ADC_ITRBuffer_RightValue];
+    }
+    }
+
+    return 9;
+}
 
 void ADC_InitPro(void)
 {

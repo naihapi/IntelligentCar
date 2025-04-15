@@ -28,16 +28,15 @@ Project File Date:  04/13/2025
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil5\ARM\ARMCC\Bin'
 Build target 'Target 1'
 Note: source file '.\Software\Delay\Delay.c' - object file renamed from '.\Objects\Delay.o' to '.\Objects\delay_1.o'.
-compiling PID.c...
-compiling MyTask.c...
-compiling main.c...
-compiling ADC.c...
-compiling MPU6050.c...
 compiling Car.c...
+Software\Car\Car.c(293): warning:  #177-D: variable "dir"  was declared but never referenced
+      uint8_t dir = 0;
+Software\Car\Car.c: 1 warning, 0 errors
+compiling MyTask.c...
 linking...
-Program Size: Code=27960 RO-data=3656 RW-data=2448 ZI-data=15064  
+Program Size: Code=28844 RO-data=3660 RW-data=2456 ZI-data=15064  
 FromELF: creating hex file...
-".\Objects\Project.axf" - 0 Error(s), 0 Warning(s).
+".\Objects\Project.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -50,7 +49,7 @@ Package Vendor: Keil
   D:/Keil5_Pack/Keil/STM32F1xx_DFP/2.4.1/Device/Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:04
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

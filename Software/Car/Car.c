@@ -51,15 +51,30 @@ uint8_t Car_GetFlag(uint8_t flag)
 }
 
 /**
- * @brief 车体旋转
+ * @brief 车体向左旋转
  *
  * @param 无
  *
  * @retval 无
  *
- * @note 360°向左旋转
+ * @note 360°旋转
  */
-void Car_Spin360(void)
+void Car_Spin360_Left(void)
+{
+    MOTOR_Pulse_Config(-7200, 7200);
+    Car_SetFlag(CAR_FLAG_SPIN, 1);
+}
+
+/**
+ * @brief 车体向右旋转
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note 360°旋转
+ */
+void Car_Spin360_Right(void)
 {
     MOTOR_Pulse_Config(7200, -7200);
     Car_SetFlag(CAR_FLAG_SPIN, 1);
@@ -93,15 +108,22 @@ void Car_Stop(void)
 /**
  * @brief 车体旋转寻线
  *
- * @param 无
+ * @param dir 方向(Car_xxxSpin)
  *
  * @retval 无
  *
  * @note 无
  */
-void Car_SearchLine_Spin(void)
+void Car_SearchLine_Spin(uint8_t dir)
 {
-    Car_Spin360();
+    if (dir == Car_LeftSpin)
+    {
+        Car_Spin360_Left();
+    }
+    else if (dir == Car_RightSpin)
+    {
+        Car_Spin360_Right();
+    }
 
     while (1)
     {
@@ -126,16 +148,18 @@ void Car_SearchLine_Spin(void)
  */
 void Car_SearchLine_Spin_Range(int16_t angle)
 {
-    Car_Spin360();
+    Car_Spin360_Right();
     int16_t yaw = 0;
 
     while (1)
     {
         yaw = (int16_t)MPU6050_Yaw;
 
-        if (ADC_ITR9909_Value[0] > 1400 || ADC_ITR9909_Value[1] > 1400 || ADC_ITR9909_Value[2] > 1400)
+        if (ADC_ITR9909_Value[ADC_ITRBuffer_LeftValue] > 1400 ||
+            ADC_ITR9909_Value[ADC_ITRBuffer_MiddleValue] > 1400 ||
+            ADC_ITR9909_Value[ADC_ITRBuffer_RightValue] > 1400)
         {
-            if (MPU6050_ThresholdCompare(yaw, MPU6050_OppositeAngle(angle), 45) == 0 && MPU6050_ThresholdCompare(yaw, angle, 45) == 0)
+            if (MPU6050_ThresholdCompare(MPU6050_Yaw, MPU6050_OppositeAngle(angle), 45) == 0 && MPU6050_ThresholdCompare(yaw, angle, 45) == 0)
             {
                 Car_Stop();
 
@@ -156,7 +180,7 @@ void Car_SearchLine_Spin_Range(int16_t angle)
  */
 void Car_BreakLine_Spin(void)
 {
-    Car_Spin360();
+    Car_Spin360_Right();
 
     while (1)
     {
@@ -237,7 +261,7 @@ void Car_ErrorLine_Handler1(void)
     Car_StraightBack(); // 车辆后退
     vTaskDelay(100);    // 延时
 
-    Car_SearchLine_Spin(); // 旋转巡线
+    Car_SearchLine_Spin(Car_RightSpin); // 旋转巡线
 
     while (1)
     {
@@ -259,4 +283,26 @@ void Car_ErrorLine_Handler1(void)
     }
 
     Car_SearchLine_Spin_Range(MPU6050_YawAngleLog_Get()); // 旋转区域巡线(不原路返回)
+}
+
+void Car_ErrorLine_Handler2(void)
+{
+    uint16_t left = ADC_TIR9909Log_Get(ADC_ITRBuffer_LeftValue);
+    uint16_t middle = ADC_TIR9909Log_Get(ADC_ITRBuffer_MiddleValue);
+    uint16_t right = ADC_TIR9909Log_Get(ADC_ITRBuffer_RightValue);
+    uint8_t dir = 0;
+
+    if (left > middle && middle > right)
+    {
+        Car_SearchLine_Spin(Car_LeftSpin);
+    }
+    else if (right > middle && middle > left)
+    {
+        Car_SearchLine_Spin(Car_RightSpin);
+    }
+    else
+    {
+        // 处理'T'字路口
+        Car_SearchLine_Spin(Car_LeftSpin);
+    }
 }
