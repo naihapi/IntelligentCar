@@ -1,8 +1,8 @@
 #include "ADC.h"
 
 uint16_t ADC_ITR9909_Value[3];  // 对管数值(ADC_ITRBuffer_xxxValue)
-uint8_t ADC_Threshold_Flag = 2; // 对管阈值(0：小于最低阈值，1：大于最高阈值，2：没有超过阈值)
-// uint8_t ADC_Threshold_Dir = 1;  // 对管方向(当)
+uint8_t ADC_Threshold_Flag = 2; // 对管阈值(ADC_FLAGSTATE_ITR9909_xxx)
+uint8_t ADC_Threshold_Dir = 2;  // 对管方向(ADC_FLAGSTATE_DIRECTION_xxx)
 
 /**
  * @brief 模转数初始化
@@ -79,6 +79,11 @@ void ADC_SetFlag(uint8_t flag, uint8_t state)
         ADC_Threshold_Flag = state;
     }
     break;
+    case ADC_FLAG_DIRECTION:
+    {
+        ADC_Threshold_Dir = state;
+    }
+    break;
     }
 }
 
@@ -89,6 +94,10 @@ uint8_t ADC_GetFlag(uint8_t flag)
     case ADC_FLAG_ITR9909_THRESHOLD:
     {
         return ADC_Threshold_Flag;
+    }
+    case ADC_FLAG_DIRECTION:
+    {
+        return ADC_Threshold_Dir;
     }
     }
 
@@ -119,11 +128,14 @@ void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
               3.0;
     if (average < mini)
     {
+        // 标志位记录
         ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_TINY);
     }
     else if (average > max)
     {
+        // 标志位记录
         ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_OVERFLOW);
+        ADC_SetFlag(ADC_FLAG_DIRECTION, ADC_FLAGSTATE_DIRECTION_BOTH);
     }
 
     average = (ADC_ITR9909_Value[ADC_ITRBuffer_LeftValue] +
@@ -131,13 +143,19 @@ void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
               2.0;
     if (average < mini)
     {
+        // 标志位记录
         ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_TINY);
     }
     else if (average > max)
     {
+        // 标志位记录
         ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_OVERFLOW);
+        ADC_SetFlag(ADC_FLAG_DIRECTION, ADC_FLAGSTATE_DIRECTION_LEFT);
+
+        // 时间记录
         Delay_TimeLog_Record();
 
+        // 仅在车辆不旋转、错误线未检测到时，记录偏航角信息
         if (Car_GetFlag(CAR_FLAG_SPIN) == 0 && Car_GetFlag(CAR_FLAG_ERRLINE) == 0)
         {
             MPU6050_YawAngleLog_Record();
@@ -150,13 +168,19 @@ void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
               2.0;
     if (average < mini)
     {
+        // 标志位记录
         ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_TINY);
     }
     else if (average > max)
     {
+        // 标志位记录
         ADC_SetFlag(ADC_FLAG_ITR9909_THRESHOLD, ADC_FLAGSTATE_ITR9909_OVERFLOW);
+        ADC_SetFlag(ADC_FLAG_DIRECTION, ADC_FLAGSTATE_DIRECTION_RIGHT);
+
+        // 时间记录
         Delay_TimeLog_Record();
 
+        // 仅在车辆不旋转、错误线未检测到时，记录偏航角信息
         if (Car_GetFlag(CAR_FLAG_SPIN) == 0 && Car_GetFlag(CAR_FLAG_ERRLINE) == 0)
         {
             MPU6050_YawAngleLog_Record();

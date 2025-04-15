@@ -127,12 +127,15 @@ void Car_SearchLine_Spin(void)
 void Car_SearchLine_Spin_Range(int16_t angle)
 {
     Car_Spin360();
+    int16_t yaw = 0;
 
     while (1)
     {
+        yaw = (int16_t)MPU6050_Yaw;
+
         if (ADC_ITR9909_Value[0] > 1400 || ADC_ITR9909_Value[1] > 1400 || ADC_ITR9909_Value[2] > 1400)
         {
-            if (MPU6050_ThresholdCompare(MPU6050_Yaw, angle, 30) == 0)
+            if (MPU6050_ThresholdCompare(yaw, MPU6050_OppositeAngle(angle), 45) == 0 && MPU6050_ThresholdCompare(yaw, angle, 45) == 0)
             {
                 Car_Stop();
 
@@ -228,4 +231,32 @@ void Car_TurnExecutionQuantity_ITR9909(int *Speed, int *Left, int *Right)
 
 void Car_ErrorLine_Handler1(void)
 {
+    int SpeedEXE = 0;
+    int LeftEXE = 0, RightEXE = 0;
+
+    Car_StraightBack(); // 车辆后退
+    vTaskDelay(100);    // 延时
+
+    Car_SearchLine_Spin(); // 旋转巡线
+
+    while (1)
+    {
+        // 巡线回退到十字路口
+        Car_SpeedExecutionQuantity_ENCODER(&SpeedEXE, 20);
+        Car_TurnExecutionQuantity_ITR9909(&SpeedEXE, &LeftEXE, &RightEXE);
+        MOTOR_Pulse_Config(LeftEXE, RightEXE);
+
+        // 回到十字路口时进入
+        if (ADC_GetFlag(ADC_FLAG_ITR9909_THRESHOLD) == ADC_FLAGSTATE_ITR9909_OVERFLOW)
+        {
+            // 再前进一点点
+            Car_StraightFront();
+            vTaskDelay(150);
+            Car_Stop();
+
+            break; // 退出循环
+        }
+    }
+
+    Car_SearchLine_Spin_Range(MPU6050_YawAngleLog_Get()); // 旋转区域巡线(不原路返回)
 }

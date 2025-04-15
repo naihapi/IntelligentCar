@@ -411,13 +411,9 @@ int16_t MPU6050_OppositeAngle(int16_t angle)
  *
  * @note 若区间=10，比较值=30°，则比较范围=30°±10
  * @note 若当前偏航角在区间内返回1，否则返回0
- * @note
- * @note 等价于：mini <= mpu_yaw && mpu_yaw <= 360 || 0 <= mpu_yaw && mpu_yaw <= max
+ * @note 由于角度一定是0~360，因此：mini <= mpu_yaw && mpu_yaw <= 360 || 0 <= mpu_yaw && mpu_yaw <= max
+ * @note 等价于：mini <= mpu_yaw || mpu_yaw <= max
  */
-// 5 -10 ±20
-// max:10 mini:330
-// 190 170
-// 350
 uint8_t MPU6050_ThresholdCompare(int16_t mpu_yaw, int16_t compare_value, int16_t vlaue)
 {
 	int16_t max = 0;

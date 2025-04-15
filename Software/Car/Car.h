@@ -38,6 +38,5 @@ void Car_StraightBack(void);
 void Car_StraightFront(void);
 void Car_SetFlag(uint8_t flag, uint8_t state);
 uint8_t Car_GetFlag(uint8_t flag);
-void Car_ErrorLine_Collection(void);
-
+void Car_ErrorLine_Handler1(void);
 #endif
