@@ -2,7 +2,7 @@
 
 volatile uint8_t Car_Spin_Flag = 0;         // 车辆旋转标志位(车辆调用旋转函数时，标志位置1；调用停止函数时，标志位置0)
 volatile uint8_t Car_ErrorLine_FLAG = 0;    // 车辆错误线处理标志位(车辆进入错路处理时，标志位置1；退出错误路处理时，标志位置0)
-volatile uint8_t Car_MPURecordYaw_Flag = 0; // 车辆记录偏航角标志位(车辆记录偏航角数据时，标志位置位；需要手动清除此标志位)
+volatile uint8_t Car_MPURecordYaw_Flag = 0; // 车辆记录偏航角标志位(车辆记录偏航角数据时，标志位置位，并触发1个处理函数；需要手动清除此标志位)
 
 /**
  * @brief 车辆初始化
@@ -78,6 +78,15 @@ uint8_t Car_GetFlag(uint8_t flag)
     return 9;
 }
 
+/**
+ * @brief MPU记录偏航角处理函数
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note 无
+ */
 void Car_MPURecordYaw_Handler(void)
 {
     if (Car_GetFlag(CAR_FALG_MPUYAWRECORD) == 1)

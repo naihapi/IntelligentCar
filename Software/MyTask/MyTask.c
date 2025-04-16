@@ -85,7 +85,7 @@ void TASK5(void *pvParameters)
 /**
  * @brief 任务6
  *
- * @note 无
+ * @note 偏航角记录处理函数
  */
 void TASK6(void *pvParameters)
 {
@@ -139,7 +139,7 @@ void TASK9(void *pvParameters)
 /**
  * @brief 任务10
  *
- * @note 无
+ * @note 编码器速度采集
  */
 void TASK10(void *pvParameters)
 {
@@ -152,7 +152,7 @@ void TASK10(void *pvParameters)
 /**
  * @brief 任务11
  *
- * @note 消除偏航角零度漂移
+ * @note 纠正偏航角零度漂移
  */
 void TASK11(void *pvParameters)
 {
