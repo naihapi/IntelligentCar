@@ -60,3 +60,8 @@
 .\objects\car.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\car.o: .\Software\PID\PID.h
 .\objects\car.o: .\Hardware\MPU6050\MPU6050_Reg.h
+.\objects\car.o: .\Software\MyTask\MyTask.h
+.\objects\car.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\car.o: .\Software\MyTask\MyTask.h
+.\objects\car.o: .\Software\Receive\Receive.h
+.\objects\car.o: .\Software\Data\Data.h

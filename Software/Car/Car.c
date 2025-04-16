@@ -290,7 +290,6 @@ void Car_ErrorLine_Handler2(void)
     uint16_t left = ADC_TIR9909Log_Get(ADC_ITRBuffer_LeftValue);
     uint16_t middle = ADC_TIR9909Log_Get(ADC_ITRBuffer_MiddleValue);
     uint16_t right = ADC_TIR9909Log_Get(ADC_ITRBuffer_RightValue);
-    uint8_t dir = 0;
 
     if (left > middle && middle > right)
     {
@@ -323,4 +322,31 @@ void Car_SearchLine_NormalMode(int *SpeedEXE, int *LeftEXE, int *RightEXE)
 
 void Car_SearchLine_ErrorLineMode(void)
 {
+    if (ADC_GetFlag(ADC_FLAG_ITR9909_THRESHOLD) == ADC_FLAGSTATE_ITR9909_TINY)
+    {
+        vTaskDelay(200); // 消抖
+        if (ADC_GetFlag(ADC_FLAG_ITR9909_THRESHOLD) == ADC_FLAGSTATE_ITR9909_TINY)
+        {
+            Car_SetFlag(CAR_FLAG_ERRLINE, 1);    // 错线置位
+            vTaskSuspend(TASK_NormalSearchLine); // 挂起普通循迹任务
+
+            // 直角/锐角判断方法
+            // 如果两个及以上的对管数值高于阈值，会记录一次时间；冲出赛道后的时间与上一次记录时间的差值小于1s，则判断为直角或锐角线路
+            if (Delay_Getxms(NULL) - Delay_TimeLog_Get() < 1000)
+            {
+                Car_StraightBack();
+                vTaskDelay(100);
+                Car_Stop();
+
+                Car_ErrorLine_Handler2();
+            }
+            else
+            {
+                Car_ErrorLine_Handler1();
+            }
+
+            Car_SetFlag(CAR_FLAG_ERRLINE, 0);
+            vTaskResume(TASK_NormalSearchLine);
+        }
+    }
 }

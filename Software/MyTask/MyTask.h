@@ -112,6 +112,9 @@ extern TaskHandle_t TASK14_Handler;
 extern TaskHandle_t TASK15_Handler;
 extern TaskHandle_t TASK_START_Handler;
 
+// 宏定义
+#define TASK_NormalSearchLine TASK8_Handler
+
 // API
 void TASK_InitPro(void);
 

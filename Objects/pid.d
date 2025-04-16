@@ -50,6 +50,8 @@
 .\objects\pid.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\pid.o: .\Peripheral\ADC\ADC.h
 .\objects\pid.o: .\Software\PID\PID.h
+.\objects\pid.o: .\Software\MyTask\MyTask.h
+.\objects\pid.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\pid.o: .\Hardware\MPU6050\MPU6050.h
 .\objects\pid.o: D:\Keil5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\pid.o: .\Software\DMP\inv_mpu.h
@@ -60,3 +62,7 @@
 .\objects\pid.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\pid.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\pid.o: .\Hardware\MPU6050\MPU6050_Reg.h
+.\objects\pid.o: .\Software\MyTask\MyTask.h
+.\objects\pid.o: .\Software\Car\Car.h
+.\objects\pid.o: .\Software\Receive\Receive.h
+.\objects\pid.o: .\Software\Data\Data.h
