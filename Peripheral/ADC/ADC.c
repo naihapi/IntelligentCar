@@ -71,6 +71,16 @@ void ADC_ITR9909_Init(void)
     ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
 
+/**
+ * @brief ADC标志位设置
+ *
+ * @param flag 标志位名称
+ * @param state 标志位状态
+ *
+ * @retval 无
+ *
+ * @note 无
+ */
 void ADC_SetFlag(uint8_t flag, uint8_t state)
 {
     switch (flag)
@@ -88,6 +98,15 @@ void ADC_SetFlag(uint8_t flag, uint8_t state)
     }
 }
 
+/**
+ * @brief ADC标志位获取
+ *
+ * @param flag 标志位名称
+ *
+ * @retval 返回标志位状态
+ *
+ * @note 无
+ */
 uint8_t ADC_GetFlag(uint8_t flag)
 {
     switch (flag)
@@ -117,6 +136,7 @@ uint8_t ADC_GetFlag(uint8_t flag)
  * @note 2个或3个对管平均值>最高阈值，输出1
  * @note 2个或3个对管平均值不超过阈值，输出2
  * @note 靠近黑色，数值上升；远离黑色，数值下降
+ * @note 阈值比较时，会产生一些标志位，具体实现参照函数内部
  */
 void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
 {
@@ -163,7 +183,7 @@ void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
         if (Car_GetFlag(CAR_FLAG_SPIN) == 0 && Car_GetFlag(CAR_FLAG_ERRLINE) == 0)
         {
             MPU6050_YawAngleLog_Record();
-            Debug_Flag1 = 1;
+            Car_SetFlag(CAR_FALG_MPUYAWRECORD, 1);
         }
     }
 
@@ -188,12 +208,21 @@ void ADC_ITR9909_ThresholdCompare(uint16_t max, uint16_t mini)
         if (Car_GetFlag(CAR_FLAG_SPIN) == 0 && Car_GetFlag(CAR_FLAG_ERRLINE) == 0)
         {
             MPU6050_YawAngleLog_Record();
-            Debug_Flag1 = 1;
+            Car_SetFlag(CAR_FALG_MPUYAWRECORD, 1);
         }
     }
 }
 uint8_t Debug_Flag1 = 0; // 蜂鸣器
 
+/**
+ * @brief ADC记录对管数值
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note 调用函数后，记录一次当前对管数值
+ */
 void ADC_TIR9909Log_Record(void)
 {
     ADC_ITR9909_RecordValue[ADC_ITRBuffer_LeftValue] = ADC_ITR9909_Value[ADC_ITRBuffer_LeftValue];
@@ -201,6 +230,15 @@ void ADC_TIR9909Log_Record(void)
     ADC_ITR9909_RecordValue[ADC_ITRBuffer_RightValue] = ADC_ITR9909_Value[ADC_ITRBuffer_RightValue];
 }
 
+/**
+ * @brief ADC返回对管数值
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note 返回上一次记录对管的数值
+ */
 uint16_t ADC_TIR9909Log_Get(uint8_t select)
 {
     switch (select)
@@ -222,6 +260,15 @@ uint16_t ADC_TIR9909Log_Get(uint8_t select)
     return 9;
 }
 
+/**
+ * @brief ADC初始化
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note 无
+ */
 void ADC_InitPro(void)
 {
     ADC_ITR9909_Init();

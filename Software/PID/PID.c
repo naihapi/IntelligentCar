@@ -128,6 +128,16 @@ int PID_Vertical_ITR9909_Function(float NowValue, float TargetValue)
            PID_vITR_D * PID_vITR_Error_Difference;
 }
 
+/**
+ * @brief 获取两侧对管执行量
+ *
+ * @param Left_ExecutionQuantity 左侧执行量
+ * @param Right_ExecutionQuantity 右侧执行量
+ *
+ * @retval 无
+ *
+ * @note 应当将此执行量反馈到车轮上
+ */
 void PID_RetExecutionQuantity_vITRControl(int *Left_ExecutionQuantity, int *Right_ExecutionQuantity)
 {
     // 获取对管数值

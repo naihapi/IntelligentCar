@@ -13,10 +13,11 @@
 //...
 
 // 宏定义
-#define CAR_FLAG_SPIN 1    // 车辆旋转标志位
-#define CAR_FLAG_ERRLINE 2 // 车辆错线标志位
-#define Car_LeftSpin 1     // 车辆左旋转
-#define Car_RightSpin 2    // 车辆右旋转
+#define CAR_FLAG_SPIN 1         // 车辆旋转标志位
+#define CAR_FLAG_ERRLINE 2      // 车辆错线标志位
+#define CAR_FALG_MPUYAWRECORD 3 // 车辆记录MPU偏航角标志位
+#define Car_LeftSpin 1          // 车辆左旋转
+#define Car_RightSpin 2         // 车辆右旋转
 
 // 外置硬件
 //...

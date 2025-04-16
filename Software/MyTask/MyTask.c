@@ -91,7 +91,7 @@ void TASK6(void *pvParameters)
 {
     while (1)
     {
-        if (Debug_Flag1 == 1)
+        if (Car_GetFlag(CAR_FALG_MPUYAWRECORD) == 1)
         {
             USART2_SendString("ADC-Left:");
             USART2_SendNumber(ADC_ITR9909_Value[0]);
@@ -114,7 +114,8 @@ void TASK6(void *pvParameters)
             GPIO_Buzzer_Config(1);
             vTaskDelay(200);
             GPIO_Buzzer_Config(0);
-            Debug_Flag1 = 0;
+
+            Car_SetFlag(CAR_FALG_MPUYAWRECORD, 0);
         }
     }
 }

@@ -7,6 +7,15 @@ uint16_t Real_L_ENCODER_CNT = 0;      // 左侧定时计数
 uint16_t Real_R_ENCODER_CNT = 0;      // 右侧定时计数
 uint16_t ENCODER_Speed = 0;           // 编码电机速度(cm/s)
 
+/**
+ * @brief 编码器初始化
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note 无
+ */
 void ENCODER_InitPro(void) {}
 
 /**
@@ -35,6 +44,16 @@ void ENCODER_Collection_CodeData(void)
     vTaskDelay(10);
 }
 
+/**
+ * @brief 外部中断线5~9
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note 用于接收编码器AB相数据
+ * @note 车辆转动一圈，会接收到1400个计数
+ */
 void EXTI9_5_IRQHandler(void)
 {
     // E1A-PB6
