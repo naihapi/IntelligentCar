@@ -306,3 +306,21 @@ void Car_ErrorLine_Handler2(void)
         Car_SearchLine_Spin(Car_LeftSpin);
     }
 }
+
+void Car_SearchLine_NormalMode(int *SpeedEXE, int *LeftEXE, int *RightEXE)
+{
+
+    Car_SpeedExecutionQuantity_ENCODER(SpeedEXE, 20);
+
+    if (ADC_GetFlag(ADC_FLAG_ITR9909_THRESHOLD) == ADC_FLAGSTATE_ITR9909_NORMAL)
+    {
+        Car_TurnExecutionQuantity_ITR9909(SpeedEXE, LeftEXE, RightEXE);
+    }
+
+    // 输出到电机
+    MOTOR_Pulse_Config(*LeftEXE, *RightEXE);
+}
+
+void Car_SearchLine_ErrorLineMode(void)
+{
+}

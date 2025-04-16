@@ -135,7 +135,7 @@ void TASK7(void *pvParameters)
 /**
  * @brief 任务8
  *
- * @note 十字错路口、直角路口巡线
+ * @note 普通循迹
  */
 void TASK8(void *pvParameters)
 {
@@ -143,15 +143,7 @@ void TASK8(void *pvParameters)
     int LeftEXE = 0, RightEXE = 0;
     while (1)
     {
-        Car_SpeedExecutionQuantity_ENCODER(&SpeedEXE, 20);
-
-        if (ADC_GetFlag(ADC_FLAG_ITR9909_THRESHOLD) == ADC_FLAGSTATE_ITR9909_NORMAL)
-        {
-            Car_TurnExecutionQuantity_ITR9909(&SpeedEXE, &LeftEXE, &RightEXE);
-        }
-
-        // 输出到电机
-        MOTOR_Pulse_Config(LeftEXE, RightEXE);
+        Car_SearchLine_NormalMode(&SpeedEXE, &LeftEXE, &RightEXE);
     }
 }
 

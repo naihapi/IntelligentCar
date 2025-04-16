@@ -42,5 +42,6 @@ void Car_SetFlag(uint8_t flag, uint8_t state);
 uint8_t Car_GetFlag(uint8_t flag);
 void Car_ErrorLine_Handler1(void);
 void Car_ErrorLine_Handler2(void);
+void Car_SearchLine_NormalMode(int *SpeedEXE, int *LeftEXE, int *RightEXE);
 
 #endif
