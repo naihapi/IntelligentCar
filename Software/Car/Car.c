@@ -78,6 +78,22 @@ uint8_t Car_GetFlag(uint8_t flag)
     return 9;
 }
 
+void Car_MPURecordYaw_Handler(void)
+{
+    if (Car_GetFlag(CAR_FALG_MPUYAWRECORD) == 1)
+    {
+        // 记录对管数据
+        ADC_TIR9909Log_Record();
+
+        // 蜂鸣器打开
+        GPIO_Buzzer_Config(1);
+        vTaskDelay(200);
+        GPIO_Buzzer_Config(0);
+
+        Car_SetFlag(CAR_FALG_MPUYAWRECORD, 0);
+    }
+}
+
 /**
  * @brief 车辆向左旋转
  *

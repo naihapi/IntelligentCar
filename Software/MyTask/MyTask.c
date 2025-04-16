@@ -91,32 +91,7 @@ void TASK6(void *pvParameters)
 {
     while (1)
     {
-        if (Car_GetFlag(CAR_FALG_MPUYAWRECORD) == 1)
-        {
-            USART2_SendString("ADC-Left:");
-            USART2_SendNumber(ADC_ITR9909_Value[0]);
-            USART2_SendString("\r\n");
-
-            USART2_SendString("ADC-Mid:");
-            USART2_SendNumber(ADC_ITR9909_Value[1]);
-            USART2_SendString("\r\n");
-
-            USART2_SendString("ADC-Right:");
-            USART2_SendNumber(ADC_ITR9909_Value[2]);
-            USART2_SendString("\r\n");
-
-            USART2_SendString("ADC-Dir:");
-            USART2_SendNumber(ADC_GetFlag(ADC_FLAG_DIRECTION));
-            USART2_SendString("\r\n");
-
-            ADC_TIR9909Log_Record();
-
-            GPIO_Buzzer_Config(1);
-            vTaskDelay(200);
-            GPIO_Buzzer_Config(0);
-
-            Car_SetFlag(CAR_FALG_MPUYAWRECORD, 0);
-        }
+        Car_MPURecordYaw_Handler();
     }
 }
 

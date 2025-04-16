@@ -46,5 +46,6 @@ void Car_ErrorLine_Handler1(void);
 void Car_ErrorLine_Handler2(void);
 void Car_SearchLine_NormalMode(int *SpeedEXE, int *LeftEXE, int *RightEXE);
 void Car_SearchLine_ErrorLineMode(void);
+void Car_MPURecordYaw_Handler(void);
 
 #endif
