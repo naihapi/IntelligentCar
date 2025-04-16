@@ -27,8 +27,8 @@
 #define ADC_FLAGSTATE_ITR9909_NORMAL (uint8_t)2     // ADC输出常规
 
 // 变量
-extern uint16_t ADC_ITR9909_Value[3];
-extern uint8_t ADC_Threshold_Flag;
+extern volatile uint16_t ADC_ITR9909_Value[3];
+extern volatile uint8_t ADC_Threshold_Flag;
 extern uint8_t Debug_Flag1;
 
 // API

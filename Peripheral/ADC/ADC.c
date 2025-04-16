@@ -1,9 +1,9 @@
 #include "ADC.h"
 
-uint16_t ADC_ITR9909_Value[3];       // 对管数值(ADC_ITRBuffer_xxxValue)
-uint8_t ADC_Threshold_Flag = 2;      // 对管阈值(ADC_FLAGSTATE_ITR9909_xxx)
-uint8_t ADC_Threshold_Dir = 2;       // 对管方向(ADC_FLAGSTATE_DIRECTION_xxx)
-uint16_t ADC_ITR9909_RecordValue[3]; // 对管数值记录
+volatile uint16_t ADC_ITR9909_Value[3];       // 对管数值(ADC_ITRBuffer_xxxValue)
+volatile uint8_t ADC_Threshold_Flag = 2;      // 对管阈值(ADC_FLAGSTATE_ITR9909_xxx)
+volatile uint8_t ADC_Threshold_Dir = 2;       // 对管方向(ADC_FLAGSTATE_DIRECTION_xxx)
+volatile uint16_t ADC_ITR9909_RecordValue[3]; // 对管数值记录
 
 /**
  * @brief 模转数初始化

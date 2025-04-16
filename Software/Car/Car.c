@@ -91,6 +91,8 @@ void Car_MPURecordYaw_Handler(void)
 {
     if (Car_GetFlag(CAR_FALG_MPUYAWRECORD) == 1)
     {
+        vTaskDelay(10);
+
         // 记录对管数据
         ADC_TIR9909Log_Record();
 
@@ -351,11 +353,14 @@ void Car_ErrorLine_Handler1(void)
         MOTOR_Pulse_Config(LeftEXE, RightEXE);
 
         // 回到十字路口时进入
-        if (ADC_GetFlag(ADC_FLAG_ITR9909_THRESHOLD) == ADC_FLAGSTATE_ITR9909_OVERFLOW)
+        if (ADC_GetFlag(ADC_FLAG_ITR9909_THRESHOLD) == ADC_FLAGSTATE_ITR9909_OVERFLOW ||
+            ADC_ITR9909_Value[ADC_ITRBuffer_LeftValue] > ADC_ITR9909_CompareValue_MAX ||
+            ADC_ITR9909_Value[ADC_ITRBuffer_MiddleValue] > ADC_ITR9909_CompareValue_MAX ||
+            ADC_ITR9909_Value[ADC_ITRBuffer_RightValue] > ADC_ITR9909_CompareValue_MAX)
         {
             // 再前进一点点
             Car_StraightFront();
-            vTaskDelay(150);
+            vTaskDelay(80);
             Car_Stop();
 
             break; // 退出循环
@@ -380,11 +385,11 @@ void Car_ErrorLine_Handler2(void)
     uint16_t middle = ADC_TIR9909Log_Get(ADC_ITRBuffer_MiddleValue);
     uint16_t right = ADC_TIR9909Log_Get(ADC_ITRBuffer_RightValue);
 
-    if (left > middle && middle > right)
+    if (left > right)
     {
         Car_SearchLine_Spin(Car_LeftSpin);
     }
-    else if (right > middle && middle > left)
+    else if (right > left)
     {
         Car_SearchLine_Spin(Car_RightSpin);
     }
@@ -406,7 +411,6 @@ void Car_ErrorLine_Handler2(void)
  */
 void Car_SearchLine_NormalMode(int *SpeedEXE, int *LeftEXE, int *RightEXE)
 {
-
     Car_SpeedExecutionQuantity_ENCODER(SpeedEXE, 20);
 
     if (ADC_GetFlag(ADC_FLAG_ITR9909_THRESHOLD) == ADC_FLAGSTATE_ITR9909_NORMAL)
@@ -439,16 +443,19 @@ void Car_SearchLine_ErrorLineMode(void)
 
             // 直角/锐角判断方法
             // 如果两个及以上的对管数值高于阈值，会记录一次时间；冲出赛道后的时间与上一次记录时间的差值小于1s，则判断为直角或锐角线路
-            if (Delay_Getxms(NULL) - Delay_TimeLog_Get() < 1000)
+            if (Delay_Getxms(NULL) - Delay_TimeLog_Get() < 900)
             {
+                // 往后退一点点
                 Car_StraightBack();
                 vTaskDelay(100);
                 Car_Stop();
 
+                // 进入巡线错误处理
                 Car_ErrorLine_Handler2();
             }
             else
             {
+                // 进入巡线错误处理
                 Car_ErrorLine_Handler1();
             }
 

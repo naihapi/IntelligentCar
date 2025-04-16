@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Wed Apr 16 11:51:41 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Wed Apr 16 14:44:26 2025
 <BR><P>
 <H3>Maximum Stack Usage =        296 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -743,7 +743,7 @@ Global Symbols
 <P><STRONG><a name="[4]"></a>BusFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_it.o(i.BusFault_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(RESET)
 </UL>
-<P><STRONG><a name="[80]"></a>Car_ErrorLine_Handler1</STRONG> (Thumb, 96 bytes, Stack size 24 bytes, car.o(i.Car_ErrorLine_Handler1))
+<P><STRONG><a name="[80]"></a>Car_ErrorLine_Handler1</STRONG> (Thumb, 126 bytes, Stack size 24 bytes, car.o(i.Car_ErrorLine_Handler1))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = Car_ErrorLine_Handler1 &rArr; Car_TurnExecutionQuantity_ITR9909 &rArr; PID_RetExecutionQuantity_vITRControl &rArr; PID_Vertical_ITR9909_Function &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU6050_YawAngleLog_Get
@@ -761,7 +761,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Car_SearchLine_ErrorLineMode
 </UL>
 
-<P><STRONG><a name="[8c]"></a>Car_ErrorLine_Handler2</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, car.o(i.Car_ErrorLine_Handler2))
+<P><STRONG><a name="[8c]"></a>Car_ErrorLine_Handler2</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, car.o(i.Car_ErrorLine_Handler2))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = Car_ErrorLine_Handler2 &rArr; Car_SearchLine_Spin &rArr; Car_Stop &rArr; MOTOR_Pulse_Config &rArr; MOTOR_Right_Pulse &rArr; TIM_MOTOR_CH2_Pulse
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_TIR9909Log_Get
@@ -775,7 +775,7 @@ Global Symbols
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Car_MPURecordYaw_Handler
 </UL>
 
-<P><STRONG><a name="[8e]"></a>Car_MPURecordYaw_Handler</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, car.o(i.Car_MPURecordYaw_Handler))
+<P><STRONG><a name="[8e]"></a>Car_MPURecordYaw_Handler</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, car.o(i.Car_MPURecordYaw_Handler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = Car_MPURecordYaw_Handler &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Car_SetFlag
