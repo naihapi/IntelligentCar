@@ -5,10 +5,12 @@ uint16_t USART2_Intrrupt_CNT = 0;            // 串口2接收1帧计数（中断
 uint16_t USART2_Intrrupt_LastCNT = 0;        // 串口2接收1帧计数（记录上一次的值，当前与上次进行对比，相等即接收完成）
 uint8_t USART2_RecFlag = 0;                  // 串口2接收标志（0=没有数据 2=正在接收数据 1=接收完成）
 
-uint8_t USART3_RecBuffer[1024] = {"USART2"}; // 串口3接收缓冲区-无线串口
+uint8_t USART3_RecBuffer[1024] = {"USART3"}; // 串口3接收缓冲区-无线串口
 uint16_t USART3_Intrrupt_CNT = 0;            // 串口3接收1帧计数（中断函数内使用）
 uint16_t USART3_Intrrupt_LastCNT = 0;        // 串口3接收1帧计数（记录上一次的值，当前与上次进行对比，相等即接收完成）
 uint8_t USART3_RecFlag = 0;                  // 串口3接收标志（0=没有数据 2=正在接收数据 1=接收完成）
+
+uint16_t USART3_CamData = 0; // 串口3视觉坐标数据
 
 /**
  * @brief 串口2清空缓冲区
@@ -316,9 +318,27 @@ void USART3_RecState(void)
     else if (USART3_Intrrupt_CNT == USART3_Intrrupt_LastCNT)
     {
         // 数据接收完成，数据缓冲区从头接收
-        USART3_RecBuffer[USART2_Intrrupt_CNT] = '\0';
+        USART3_RecBuffer[USART3_Intrrupt_CNT] = '\0';
         USART3_Intrrupt_CNT = 0;
         USART3_RecFlag = 1;
+    }
+}
+
+/**
+ * @brief 串口采集视觉数据
+ *
+ * @param 无
+ *
+ * @retval 无
+ *
+ * @note 目前仅传输x轴坐标数据，用于转向控制
+ */
+void USART_CollectData(void)
+{
+    if (USART3_RecFlag == 1)
+    {
+        USART3_CamData = atoi((char *)USART3_RecBuffer);
+        USART3_RecFlag = 0;
     }
 }
 

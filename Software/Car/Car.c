@@ -327,6 +327,42 @@ void Car_TurnExecutionQuantity_ITR9909(int *Speed, int *Left, int *Right)
 }
 
 /**
+ * @brief 获取车辆转向执行量(视觉)
+ *
+ * @param Speed 速度执行量
+ * @param Left 左轮执行量
+ * @param Right 右轮执行量
+ *
+ * @retval 无
+ *
+ * @note 根据Speed速度闭环执行量，获取转向执行量
+ */
+void Car_TurnExecutionQuantity_Camera(int *Speed, int *Left, int *Right)
+{
+    int Cam_Execution = 0;                   // 视觉执行量
+    int RealOut_Left = 0, RealOut_Right = 0; // 最终电机输出数值
+
+    // 默认情况下，最终输出量=速度执行量
+    RealOut_Left = RealOut_Right = *Speed;
+
+    // 获取视觉执行量
+    PID_RetExecutionQuantity_vCamControl(&Cam_Execution);
+
+    // 右侧对管输出执行量
+    RealOut_Left -= Cam_Execution;
+    RealOut_Right += Cam_Execution;
+
+    // 限幅
+    if (RealOut_Left < 0)
+        RealOut_Left = 0;
+    if (RealOut_Right < 0)
+        RealOut_Right = 0;
+
+    *Left = RealOut_Left;
+    *Right = RealOut_Right;
+}
+
+/**
  * @brief 车辆错误循迹处理方式1
  *
  * @param 无
@@ -401,15 +437,18 @@ void Car_ErrorLine_Handler2(void)
 }
 
 /**
- * @brief 车辆普通循迹模式
+ * @brief 车辆普通循迹模式(对管)
  *
- * @param 无
+ * @param SpeedEXE 速度执行量的变量
+ * @param LeftEXE 左轮执行量的变量
+ * @param RightEXE 右轮执行量的变量
  *
  * @retval 无
  *
+ * @note 传入空变量即可
  * @note 按照循迹传感器执行
  */
-void Car_SearchLine_NormalMode(int *SpeedEXE, int *LeftEXE, int *RightEXE)
+void Car_SearchLine_ITRNormalMode(int *SpeedEXE, int *LeftEXE, int *RightEXE)
 {
     Car_SpeedExecutionQuantity_ENCODER(SpeedEXE, 20);
 
@@ -417,6 +456,28 @@ void Car_SearchLine_NormalMode(int *SpeedEXE, int *LeftEXE, int *RightEXE)
     {
         Car_TurnExecutionQuantity_ITR9909(SpeedEXE, LeftEXE, RightEXE);
     }
+
+    // 输出到电机
+    MOTOR_Pulse_Config(*LeftEXE, *RightEXE);
+}
+
+/**
+ * @brief 车辆普通循迹模式(视觉)
+ *
+ * @param SpeedEXE 速度执行量的变量
+ * @param LeftEXE 左轮执行量的变量
+ * @param RightEXE 右轮执行量的变量
+ *
+ * @retval 无
+ *
+ * @note 传入空变量即可
+ * @note 按照循迹传感器执行
+ */
+void Car_SearchLine_CamNormalMode(int *SpeedEXE, int *LeftEXE, int *RightEXE)
+{
+    Car_SpeedExecutionQuantity_ENCODER(SpeedEXE, 20);
+
+    Car_TurnExecutionQuantity_ITR9909(SpeedEXE, LeftEXE, RightEXE);
 
     // 输出到电机
     MOTOR_Pulse_Config(*LeftEXE, *RightEXE);

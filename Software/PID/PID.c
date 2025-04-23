@@ -16,6 +16,13 @@ float PID_vITR_Error_Sum = 0;
 float PID_vITR_Error_Last = 0;
 float PID_vITR_Error_Difference = 0;
 
+/*转向环-视觉控制*/
+float PID_vCAM_P = 300, PID_vCAM_I = 5, PID_vCAM_D = 100;
+float PID_vCAM_Error = 0;
+float PID_vCAM_Error_Sum = 0;
+float PID_vCAM_Error_Last = 0;
+float PID_vCAM_Error_Difference = 0;
+
 /**
  * @brief 限幅到目标值
  *
@@ -147,4 +154,60 @@ void PID_RetExecutionQuantity_vITRControl(int *Left_ExecutionQuantity, int *Righ
     // 返回执行量
     *Left_ExecutionQuantity = PID_Vertical_ITR9909_Function(ITR_Left, PID_ITROFFSIDE_TargetValue);
     *Right_ExecutionQuantity = PID_Vertical_ITR9909_Function(ITR_Right, PID_ITROFFSIDE_TargetValue);
+}
+
+/**
+ * @brief 视觉控制的转向闭环控制
+ *
+ * @param NowValue 当前值
+ * @param TargetValue 目标值
+ *
+ * @retval 返回执行量
+ *
+ * @note 无
+ */
+int PID_Vertical_Camera_Function(float NowValue, float TargetValue)
+{
+    // 误差值（比例P）
+    PID_vITR_Error = TargetValue - NowValue;
+
+    // 误差值滤波
+    PID_vITR_Error = PID_vITR_Error * 0.3 + PID_vITR_Error_Last * 0.7;
+
+    // 误差值累加（积分I）
+    PID_vITR_Error_Sum += PID_vITR_Error;
+
+    // 误差值累加限幅(±3000)
+    PID_Limit(&PID_vITR_Error_Sum, 3000);
+
+    // 误差值的差值（微分D）
+    PID_vITR_Error_Difference = PID_vITR_Error - PID_vITR_Error_Last;
+
+    // 误差值记录
+    PID_vITR_Error_Last = PID_vITR_Error;
+
+    // PID计算并返回
+    return PID_vITR_P * PID_vITR_Error +
+           PID_vITR_I * PID_vITR_Error_Sum +
+           PID_vITR_D * PID_vITR_Error_Difference;
+}
+
+/**
+ * @brief 获取视觉控制执行量
+ *
+ * @param Left_ExecutionQuantity 左侧执行量
+ * @param Right_ExecutionQuantity 右侧执行量
+ *
+ * @retval 无
+ *
+ * @note 返回x轴偏移的执行量
+ * @note 应当将此执行量反馈到车轮上
+ */
+void PID_RetExecutionQuantity_vCamControl(int *ExecutionQuantity)
+{
+    // 获取对管数值
+    uint16_t CameraValue = USART3_CamData;
+
+    // 返回执行量
+    *ExecutionQuantity = PID_Vertical_Camera_Function(CameraValue, PID_CAMERA_TargetValue);
 }

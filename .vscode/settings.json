@@ -17,6 +17,7 @@
         "gpio.h": "c",
         "mpu6050_reg.h": "c",
         "pid.h": "c",
-        "stm32f10x.h": "c"
+        "stm32f10x.h": "c",
+        "compare": "c"
     }
 }

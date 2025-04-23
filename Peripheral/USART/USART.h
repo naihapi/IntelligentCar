@@ -5,6 +5,7 @@
 #include "string.h"
 #include "stdio.h"
 #include "stdarg.h"
+#include "stdlib.h"
 
 // MCU型号
 #include "stm32f10x.h"
@@ -14,6 +15,7 @@ extern uint8_t USART2_RecFlag;
 extern uint8_t USART2_RecBuffer[1024];
 extern uint8_t USART3_RecFlag;
 extern uint8_t USART3_RecBuffer[1024];
+extern uint16_t USART3_CamData;
 
 // 宏定义
 //...
@@ -32,5 +34,6 @@ void USART2_SendNumber(int32_t Number);
 void USART3_SendNumber(int32_t Number);
 void USART2_RecState(void);
 void USART3_RecState(void);
+void USART_CollectData(void);
 
 #endif

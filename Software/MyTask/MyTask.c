@@ -26,7 +26,7 @@ void TASK1(void *pvParameters)
 {
     while (1)
     {
-        vTaskDelay(1);
+        USART_CollectData();
     }
 }
 
@@ -53,7 +53,8 @@ void TASK3(void *pvParameters)
 {
     while (1)
     {
-        vTaskDelay(1);
+        USART3_RecState();
+        vTaskDelay(100);
     }
 }
 
@@ -99,6 +100,7 @@ void TASK6(void *pvParameters)
  * @brief 任务7
  *
  * @note 阈值比较采集
+ * @note 使用视觉循迹时，请注释它！
  */
 void TASK7(void *pvParameters)
 {
@@ -112,6 +114,7 @@ void TASK7(void *pvParameters)
  * @brief 任务8
  *
  * @note 普通循迹
+ * @note 仅允许使用其一循迹模式，请注释另一个！
  */
 void TASK8(void *pvParameters)
 {
@@ -119,20 +122,23 @@ void TASK8(void *pvParameters)
     int LeftEXE = 0, RightEXE = 0;
     while (1)
     {
-        Car_SearchLine_NormalMode(&SpeedEXE, &LeftEXE, &RightEXE);
+        Car_SearchLine_CamNormalMode(&SpeedEXE, &LeftEXE, &RightEXE);
+        // Car_SearchLine_ITRNormalMode(&SpeedEXE, &LeftEXE, &RightEXE);
     }
 }
 
 /**
  * @brief 任务9
  *
- * @note 无
+ * @note 错误路线处理
+ * @note 若使用视觉循迹时，请注释它！
+ * @note 若在白纸或其它地方进行灰度巡线时，请调整阈值参数、错误路线消抖时间，目前参数仅在哑光和亮面地板上使用！
  */
 void TASK9(void *pvParameters)
 {
     while (1)
     {
-        Car_SearchLine_ErrorLineMode();
+        // Car_SearchLine_ErrorLineMode();
     }
 }
 

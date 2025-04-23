@@ -44,8 +44,10 @@ void Car_SetFlag(uint8_t flag, uint8_t state);
 uint8_t Car_GetFlag(uint8_t flag);
 void Car_ErrorLine_Handler1(void);
 void Car_ErrorLine_Handler2(void);
-void Car_SearchLine_NormalMode(int *SpeedEXE, int *LeftEXE, int *RightEXE);
+void Car_SearchLine_ITRNormalMode(int *SpeedEXE, int *LeftEXE, int *RightEXE);
+void Car_SearchLine_CamNormalMode(int *SpeedEXE, int *LeftEXE, int *RightEXE);
 void Car_SearchLine_ErrorLineMode(void);
 void Car_MPURecordYaw_Handler(void);
+void Car_TurnExecutionQuantity_Camera(int *Speed, int *Left, int *Right);
 
 #endif
